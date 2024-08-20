@@ -1,7 +1,7 @@
 console.log('Starting test script...');
 
 const { User, sequelize } = require('./models'); // Ensure this path is correct
-
+//hi
 // Ensure the connection to the database is established
 sequelize.authenticate()
     .then(() => console.log('Database connection established.'))

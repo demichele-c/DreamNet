@@ -1,9 +1,12 @@
-const { Dream } = require('../models');
+const { Dream, User } = require('../models');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.createDream = async (req, res) => {
   try {
     const { description, date, tags } = req.body;
     const userId = req.session.userId;
+
     await Dream.create({ description, date, tags, userId });
     res.status(201).json({ message: 'Dream logged successfully' });
   } catch (error) {

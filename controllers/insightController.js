@@ -7,7 +7,7 @@ const generateInsight = async (description) => {
 
 exports.getInsights = async (req, res) => {
   try {
-    const dreams = await Dream.findAll(); // Get all dreams or filter
+    const dreams = await Dream.findAll();
     const insights = await Promise.all(dreams.map(dream => generateInsight(dream.description)));
     res.json(insights);
   } catch (error) {

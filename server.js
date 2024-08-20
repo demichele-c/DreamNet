@@ -1,10 +1,10 @@
-// server.js
 const express = require('express');
 const session = require('express-session');
 const Sequelize = require('sequelize');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const dotenv = require('dotenv');
+const OpenAI = require('openai');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -41,14 +41,32 @@ app.use(session({
     cookie: { secure: process.env.NODE_ENV === 'production' } // Secure cookies in production
 }));
 
+// Set up OpenAI client
+const client = new OpenAI({
+    apiKey: process.env.OPEN_AI_KEY,
+});
+
 // Import routes
 const apiRoutes = require('./routes/apiRoutes');
 const viewRoutes = require('./routes/viewRoutes');
 
-
 // Use routes
 app.use('/api', apiRoutes);
 app.use('/', viewRoutes);
+
+// Additional route for interpreting dreams
+app.post('/interpret-dream', async (req, res) => {
+    try {
+        const chatCompletion = await client.chat.completions.create({
+            messages: [{ role: 'user', content: JSON.stringify(req.body) }],
+            model: 'gpt-3.5-turbo',
+        });
+        res.json(chatCompletion.choices);
+    } catch (error) {
+        console.error('Error interpreting dream:', error);
+        res.status(500).json({ error: 'Failed to interpret dream' });
+    }
+});
 
 // Sync database and start server
 sequelize.sync().then(() => {

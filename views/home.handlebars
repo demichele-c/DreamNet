@@ -6,9 +6,12 @@
 <body>
     <h1>Welcome to DreamNet</h1>
     <nav>
-        <a href="/login">Login</a>
-        <a href="/register">Register</a> <!-- Added Registration Link -->
-        <a href="/dashboard">Dashboard</a>
+        {{#if isAuthenticated}}
+            <a href="/dashboard">Dashboard</a>
+        {{else}}
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        {{/if}}
     </nav>
 </body>
 </html>

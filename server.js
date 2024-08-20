@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const session = require('express-session');
 const Sequelize = require('sequelize');
@@ -44,7 +43,6 @@ app.use(session({
 // Import routes
 const apiRoutes = require('./routes/apiRoutes');
 const viewRoutes = require('./routes/viewRoutes');
-
 
 // Use routes
 app.use('/api', apiRoutes);

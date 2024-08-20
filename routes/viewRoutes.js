@@ -1,19 +1,20 @@
+// routes/viewRoutes.js
 const express = require('express');
 const router = express.Router();
+const { isAuthenticated } = require('../middleware/authMiddleware'); // Adjust path if necessary
 
 router.get('/', (req, res) => res.render('home'));
-router.get('/dashboard', (req, res) => res.render('dashboard'));
-router.get('/dreams', (req, res) => res.render('dream'));
-router.get('/insights', (req, res) => res.render('insights'));
 
-// Route to render the login page
+router.get('/dashboard', isAuthenticated, (req, res) => res.render('dashboard'));
+router.get('/dreams', isAuthenticated, (req, res) => res.render('dream'));
+router.get('/insights', isAuthenticated, (req, res) => res.render('insights'));
+
 router.get('/login', (req, res) => {
-    res.render('login', { layout: 'main' });  // Make sure 'login.handlebars' exists in 'views'
-  });
-  
-  // Serve the registration page
+    res.render('login', { layout: 'main' });
+});
+
 router.get('/register', (req, res) => {
-  res.render('register');
+    res.render('register');
 });
 
 module.exports = router;

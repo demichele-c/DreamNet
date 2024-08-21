@@ -49,12 +49,14 @@ const client = new OpenAI({
 // Import routes
 const apiRoutes = require('./routes/apiRoutes');
 const viewRoutes = require('./routes/viewRoutes');
+const interpretationRoutes = require('./controllers/interpretationController'); // New import
 
 // Use routes
 app.use('/api', apiRoutes);
 app.use('/', viewRoutes);
+app.use('/interpretations', interpretationRoutes); // New route
 
-// Additional route for interpreting dreams
+// Additional route for interpreting dreams (existing)
 app.post('/interpret-dream', async (req, res) => {
     try {
         const chatCompletion = await client.chat.completions.create({
@@ -69,7 +71,7 @@ app.post('/interpret-dream', async (req, res) => {
 });
 
 // Sync database and start server
-sequelize.sync().then(() => {
+sequelize.sync({ force: true }).then(() => {
     app.listen(PORT, () => {
         console.log(`Server is running on http://localhost:${PORT}`);
     });

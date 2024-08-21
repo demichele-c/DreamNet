@@ -11,6 +11,12 @@ CREATE TABLE Users (
     password TEXT NOT NULL
 );
 
+CREATE TABLE interpretations (
+    id SERIAL PRIMARY KEY,
+    dream_description TEXT NOT NULL,
+    interpretation_text TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 -- Add any other tables you might need
 -- For example:
 -- CREATE TABLE Dreams (

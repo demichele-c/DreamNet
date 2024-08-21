@@ -17,7 +17,11 @@
             <textarea id="dreamInput" name="dream_description" rows="10" cols="50"></textarea><br><br>
             <button type="submit">Interpret Dream</button>
         </form>
-        <div id="resultContainer">
+        <div id="resultContainer" style="display: none;">
+            <h3>Interpretation Result:</h3>
+            <div id="result"></div>
+        </div>
+        <div id="previousInterpretations">
             <h3>Previous Interpretations:</h3>
             {{#each interpretations}}
                 <div class="interpretation">

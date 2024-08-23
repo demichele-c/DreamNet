@@ -17,7 +17,7 @@ class Dream extends Model {}
     userId: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'Users',
+        model: 'User',
         key: 'id'
       }},
     },

@@ -1,7 +1,7 @@
 const { User } = require('../models');
 const bcrypt = require('bcrypt');
 
-exports.registerUser = async (req, res) => {
+exports.registerUser = async (req, res) => { console.log ("register user")
   try {
     const { username, password } = req.body;
 
@@ -15,7 +15,7 @@ exports.registerUser = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ error: 'Username already taken' });
     }
-
+console.log ("---")
     // Hash password and create user
     const hashedPassword = await bcrypt.hash(password, 10);
     await User.create({ username, password: hashedPassword });

@@ -4,10 +4,11 @@ const bcrypt = require('bcrypt');
 const dreamController = require('../controllers/dreamController');
 const insightController = require('../controllers/insightController');
 const userController = require('../controllers/userController');
-const { User } = require('../models');
+const { User, Dream, } = require('../models');
 
 // Register a new user with hashed password
 router.post('/register', async (req, res) => {
+    console.log ("helloooo")
     try {
         const { username, password } = req.body;
 

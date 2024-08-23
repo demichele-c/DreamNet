@@ -19,7 +19,7 @@ class Insight extends Model {}
       sequelize,
       freezeTableName: true,
       underscored: true,
-      modelName: 'User',
+      modelName: 'Insight',
   });
   
     module.exports = Insight;

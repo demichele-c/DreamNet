@@ -1,5 +1,8 @@
-module.exports = (sequelize, DataTypes) => {
-  const Insight = sequelize.define('Insight', {
+const {Model, DataTypes} = require('sequelize')
+const sequelize = require('../config/connection')
+
+class Insight extends Model {}
+ Insight.init( {
     insight: {
       type: DataTypes.TEXT,
       allowNull: false
@@ -10,15 +13,13 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Dreams',
         key: 'id'
       }
-    }
+    }},
+
+    {
+      sequelize,
+      freezeTableName: true,
+      underscored: true,
+      modelName: 'User',
   });
-
-  Insight.associate = (models) => {
-    Insight.belongsTo(models.Dream, {
-      foreignKey: 'dreamId',
-      as: 'dream'
-    });
-  };
-
-  return Insight;
-};
+  
+    module.exports = Insight;

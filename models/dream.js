@@ -1,5 +1,8 @@
-module.exports = (sequelize, DataTypes) => {
-  const Dream = sequelize.define('Dream', {
+const {Model, DataTypes} = require('sequelize')
+const sequelize = require('../config/connection')
+
+class Dream extends Model {}
+ Dream.init( {
     description: {
       type: DataTypes.TEXT,
       allowNull: false
@@ -16,20 +19,13 @@ module.exports = (sequelize, DataTypes) => {
       references: {
         model: 'Users',
         key: 'id'
-      }
-    }
-  });
-
-  Dream.associate = (models) => {
-    Dream.belongsTo(models.User, {
-      foreignKey: 'userId',
-      as: 'user'
+      }},
+    },
+    {
+      sequelize,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'Dream',
     });
-    Dream.hasMany(models.Insight, {
-      foreignKey: 'dreamId',
-      as: 'insights'
-    });
-  };
 
-  return Dream;
-};
+  module.exports = Dream;

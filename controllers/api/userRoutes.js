@@ -1,16 +1,17 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const bcrypt = require('bcrypt');
 
 router.post('/', async (req, res) => {
     try {
         // Ensure req.body contains necessary fields
-        const { userName, password, name } = req.body;
+        const { name, userName, password } = req.body;
         if (!userName || !password) {
             return res.status(400).json({ message: 'Username and password are required' });
         }
 
         // Check if the username already exists
-        const existingUser = await User.findOne({ where: { user_name: userName } });
+        const existingUser = await User.findOne({ where: { userName: userName } });
         if (existingUser) {
             return res.status(400).json({ message: 'Username already exists' });
         }
@@ -21,7 +22,7 @@ router.post('/', async (req, res) => {
         // Create a new user
         const newUser = await User.create({
             name,
-            user_name: userName,
+            userName: userName,
             password: hashedPassword
         });
 
@@ -40,7 +41,7 @@ router.post('/', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     try {
-        const userData = await User.findOne({ where: { user_name: req.body.userName } });
+        const userData = await User.findOne({ where: { userName: req.body.userName } });
 
         if (!userData) {
             return res.status(400).json({ message: 'Incorrect username or password, please try again' });

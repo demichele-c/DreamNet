@@ -1,17 +1,31 @@
 const sequelize = require('../config/connection');
-const { User } = require ('../models');
+const { User, Dream } = require('../models');
 
 const userData = require('./userData.json');
+const dreamData = require('./dreamData.json');
 
 const seedDatabase = async () => {
+  try {
+    // Sync database and drop existing tables
     await sequelize.sync({ force: true });
 
-const users = await User.bulkCreate(userData, {
-    individualHooks: true,
-    returning: true,
-});
+    // Create users
+    const users = await User.bulkCreate(userData, {
+      individualHooks: true,
+      returning: true,
+    });
 
-process.exit(0);
+    // Create dreams with corresponding user_id
+    for (const dream of dreamData) {
+      await Dream.create(dream);
+    }
+
+    console.log('Database seeded successfully!');
+  } catch (err) {
+    console.error('Error seeding database:', err);
+  } finally {
+    process.exit(0);
+  }
 };
 
 seedDatabase();

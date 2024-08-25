@@ -1,34 +1,50 @@
-document.getElementById('login-form').addEventListener('submit', async (event) => {
+const loginFormHandler = async (event) => {
     event.preventDefault();
 
-    const username = document.querySelector('input[name="username"]').value;
-    const password = document.querySelector('input[name="password"]').value;
+    const userName = document.querySelector('#username-login').value.trim(); // Changed to '#username-login'
+    const password = document.querySelector('#password-login').value.trim();
 
-    console.log('Submitting login form with:', { username, password });
-
-    try {
-        const response = await fetch('/api/login', {
+    if (userName && password) {
+        const response = await fetch('/api/users/login', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ userName, password }),
+            headers: { 'Content-Type': 'application/json' },
         });
 
-        const result = await response.json();
+        if (response.ok) {
+            document.location.replace('/profile');
+        } else {
+            alert(response.statusText);
+        }
+    }
+};
 
-        console.log('Login response JSON:', result);
+const signupFormHandler = async (event) => {
+    event.preventDefault();
+
+    const name = document.querySelector('#name-signup').value.trim();
+    const userName = document.querySelector('#userName-signup').value.trim(); // Ensure these IDs match your HTML
+    const password = document.querySelector('#password-signup').value.trim();
+
+    if (name && userName && password) {
+        const response = await fetch('/api/users', {
+            method: 'POST',
+            body: JSON.stringify({ name, userName, password }),
+            headers: { 'Content-Type': 'application/json' },
+        });
 
         if (response.ok) {
-            // Redirect to dashboard
-            console.log('Redirecting to:', result.redirect);
-            window.location.href = result.redirect;
+            document.location.replace('/profile');
         } else {
-            console.error('Error logging in user:', result.message);
-            alert('Login failed: ' + result.message);
+            alert(response.statusText);
         }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An unexpected error occurred');
     }
-});
+};
+
+document
+    .querySelector('.login-form')
+    .addEventListener('submit', loginFormHandler);
+
+document
+    .querySelector('.signup-form')
+    .addEventListener('submit', signupFormHandler);

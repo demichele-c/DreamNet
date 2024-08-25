@@ -1,29 +1,13 @@
-// module.exports = (sequelize, DataTypes) => {
-//   const User = sequelize.define('User', {
-//     username: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//       unique: true
-//     },
-//     password: {
-//       type: DataTypes.STRING,
-//       allowNull: false
-//     }
-//   });
-
-//   User.associate = (models) => {
-//     User.hasMany(models.Dream, {
-//       foreignKey: 'userId',
-//       as: 'dreams'
-//     });
-//   };
-
-//   return User;
-// };
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection'); // Adjust the path as needed
+const bcrypt = require('bcrypt');
+const sequelize = require('../config/connection');
 
-class User extends Model {}
+class User extends Model {
+  // Correct parameter name to match usage in bcrypt.compareSync
+  checkPassword(loginPW) {
+    return bcrypt.compareSync(loginPW, this.password);
+  }
+}
 
 User.init(
   {
@@ -33,31 +17,43 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    username: {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    userName: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        len: [4, 20], // Example validation rule for length
+        is: /^[a-zA-Z0-9_]+$/i // Example regex validation for alphanumeric and underscore
+      }
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      field: 'created_at',
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      field: 'updated_at',
+      validate: {
+        len: [8],
+      },
     },
   },
   {
+    hooks: {
+      beforeCreate: async (newUserData) => {
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        return newUserData;
+      },
+      beforeUpdate: async (updatedUserData) => {
+        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        return updatedUserData;
+      },
+    },
     sequelize,
-    modelName: 'User',
-    underscored: true,
+    timestamps: false,
     freezeTableName: true,
+    underscored: true,
+    modelName: 'user',
   }
 );
 

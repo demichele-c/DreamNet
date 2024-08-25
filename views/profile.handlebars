@@ -1,48 +1,27 @@
-<div class="row">
-  <div class="col-auto">
-    <h2>Welcome, {{ name }}!</h2>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="/css/profile.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <ul>
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><button id="logout">Logout</button></li>
+    </ul>
+  </nav>
 
-<div class="row mt-4">
-  <div class="col-md-6">
-    <h3>Create a New dream:</h3>
-
-    <form class="form new-dream-form">
-      <div class="form-group">
-        <label for="dream-name">dream name:</label>
-        <input class="form-input" type="text" id="dream-name" name="dream-name" />
-      </div>
-      <div class="form-group">
-        <label for="dream-interprertation">needed interpretation ($):</label>
-        <input class="form-input" type="number" id="dream-interpretation" name="dream-interpreation" />
-      </div>
-      <div class="form-group">
-        <label for="user_name">interpretation:</label>
-        <textarea class="form-input" id="user-name" name="user-name"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create</button>
-      </div>
-    </form>
-  </div>
-
-  {{#if dreams.length}}
-  <div class="col-md-6 project-list">
-    <h3>Current dreams:</h3>
-
-    {{#each dreams as |dream|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/dream/{{dream.id}}">{{dream.name}}</a></h4>
-      </div>
-      <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{dream.id}}">DELETE</button>
-      </div>
+  <!-- Main Content -->
+  <div class="row">
+    <div class="col-auto">
+      <h2>Welcome, {{name}} to DreamNet!</h2>
     </div>
-    {{/each}}
   </div>
-  {{/if}}
-</div>
 
-<script src="./js/profile.js"></script>
+  <script src="/js/logout.js"></script>
+</body>
+</html>

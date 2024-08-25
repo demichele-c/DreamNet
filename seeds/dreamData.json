@@ -1,0 +1,21 @@
+[
+    {
+      "name": "Explore the Galaxy",
+      "description": "An adventure to the far reaches of the galaxy.",
+      "date_created": "2024-08-25T12:00:00Z",
+      "user_id": 1
+    },
+    {
+      "name": "Underwater Expedition",
+      "description": "A deep dive into the ocean's depths.",
+      "date_created": "2024-08-25T12:30:00Z",
+      "user_id": 2
+    },
+    {
+      "name": "Mountain Climbing",
+      "description": "A challenging climb up the highest peaks.",
+      "date_created": "2024-08-25T13:00:00Z",
+      "user_id": 3
+    }
+  ]
+  

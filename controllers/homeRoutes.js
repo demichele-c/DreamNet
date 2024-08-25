@@ -1,61 +1,82 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { Dream , User } = require('../models');
 const withAuth = require('../utils/auth');
 
-// Route to get dashboard (ensures user is logged in)
 router.get('/', async (req, res) => {
-    // Check if the user is logged in
-    if (!req.session.logged_in) {
-        return res.redirect('/login'); // Redirect to login page if not logged in
-    }
+  try {
+    // Get all projects and JOIN with user data
+    const dreamData = await Dream.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
+    });
 
-    try {
-        // Retrieve the logged-in user's data
-        const userData = await User.findByPk(req.session.user_id, {
-            attributes: { exclude: ['password'] }, // Exclude the password from the result
-        });
+    // Serialize data so the template can read it
+    const dreams = dreamData.map((dream) => dream.get({ plain: true }));
 
-        // Serialize the user data
-        const user = userData.get({ plain: true });
-
-        // Pass serialized data and session flag into the template
-        res.render('dashboard', { 
-            user, 
-            logged_in: req.session.logged_in 
-        });
-    } catch (err) {
-        console.error('Error fetching user data:', err);
-        res.status(500).json({ message: 'Internal Server Error' });
-    }
+    // Pass serialized data and session flag into template
+    res.render('homepage', { 
+      dreams, 
+      logged_in: req.session.logged_in 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-// Route to get dashboard (with auth middleware)
-router.get('/dashboard', withAuth, async (req, res) => {
-    try {
-        const userData = await User.findByPk(req.session.user_id, {
-            attributes: { exclude: ['password'] },
-        });
-    
-        const user = userData.get({ plain: true });
+router.get('/dream/:id', async (req, res) => {
+  try {
+    const dreamData = await Dream.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
+    });
 
-        res.render('dashboard', {
-            ...user,
-            logged_in: true
-        });
-    } catch (err) { 
-        console.error('Error fetching user data:', err);
-        res.status(500).json({ message: 'Internal Server Error' });
-    }
+    const dream = dreamData.get({ plain: true });
+
+    res.render('dream', {
+      ...dream,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-// Route to get login page
+// Use withAuth middleware to prevent access to route
+router.get('/profile', withAuth, async (req, res) => {
+  try {
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Dream }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render('profile', {
+      ...user,
+      logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get('/login', (req, res) => {
-    if (req.session.logged_in) {
-        res.redirect('/dashboard');
-        return;
-    }
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/profile');
+    return;
+  }
 
-    res.render('login');
+  res.render('login');
 });
 
 module.exports = router;

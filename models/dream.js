@@ -1,31 +1,43 @@
-// const {Model, DataTypes} = require('sequelize')
-// const sequelize = require('../config/connection')
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
-// class Dream extends Model {}
-//  Dream.init( {
-//     description: {
-//       type: DataTypes.TEXT,
-//       allowNull: false
-//     },
-//     date: {
-//       type: DataTypes.DATEONLY,
-//       allowNull: false
-//     },
-//     tags: {
-//       type: DataTypes.STRING
-//     },
-//     userId: {
-//       type: DataTypes.INTEGER,
-//       references: {
-//         model: 'User',
-//         key: 'id'
-//       }},
-//     },
-//     {
-//       sequelize,
-//     freezeTableName: true,
-//     underscored: true,
-//     modelName: 'Dream',
-//     });
+class Dream extends Model {}
 
-//   module.exports = Dream;
+Dream.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+    },
+    date_created: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'User',
+        key: 'id',
+      },
+    },
+  },
+  {
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'Dream',
+  }
+);
+
+module.exports = Dream;

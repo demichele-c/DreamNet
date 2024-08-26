@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to DreamNet</h1>
+    <nav>
+        {{#if isAuthenticated}}
+            <a href="/dashboard">Dashboard</a>
+        {{else}}
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        {{/if}}
+    </nav>
+</body>
+</html>

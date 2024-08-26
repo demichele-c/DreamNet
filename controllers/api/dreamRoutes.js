@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { Dream } = require('../../models');
 const withAuth = require('../../utils/auth');
+require("dotenv").config();
+const OpenAI = require("openai");
 
 router.post('/', withAuth, async (req, res) => {
   try {
@@ -34,5 +36,26 @@ router.delete('/:id', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
+router.post("/interpret-dream", async (req, res) =>{
+  const client = new OpenAI({
+    apiKey: process.env.OPEN_AI_KEY,
+});
+  
+  try {
+    const chatCompletion = await client.chat.completions.create({
+      messages: [{ role: 'user', content:JSON.stringify(req.body)}],
+      model: 'gpt-3.5-turbo',
+    });
+    console.log("Response: ", chatCompletion)
+    res.json(chatCompletion.choices)
+    
+  } catch (error) {
+    console.log("err: ", error);
+    res.json({ msg: error}) 
+  }
+}) 
+
 
 module.exports = router;

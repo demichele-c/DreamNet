@@ -1,9 +1,7 @@
-const router = require('express').Router();
-
-
+const express = require('express');
+const router = express.Router();
 const { Dream, User } = require('../models');
 const withAuth = require('../utils/auth');
-
 
 // Route to get the homepage
 router.get('/', async (req, res) => {
@@ -30,8 +28,8 @@ router.get('/', async (req, res) => {
   }
 });
 
-
-
+// Route to get the user's dreams (assuming this was intended to be a route)
+router.get('/dreams', withAuth, async (req, res) => {
   try {
     // Find the logged-in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
@@ -43,7 +41,6 @@ router.get('/', async (req, res) => {
         },
       ],
     });
-
 
     const user = userData.get({ plain: true });
 
@@ -57,7 +54,6 @@ router.get('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 // Route to get a single dream by id
 router.get('/dream/:id', async (req, res) => {

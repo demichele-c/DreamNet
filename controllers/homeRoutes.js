@@ -40,6 +40,7 @@ router.get('/dreams', withAuth, async (req, res) => {
         res.status(500).json(err);
     }
 });
+// Route to get all dreams for the logged-in user
 
 // Route to get a single dream by id
 router.get('/dream/:id', async (req, res) => {
@@ -67,18 +68,30 @@ router.get('/dream/:id', async (req, res) => {
 // controllers/homeroutes.js
 router.get('/insights', withAuth, async (req, res) => {
   try {
+    console.log('User ID from session:', req.session.user_id); // Debug log for session data
+
+    // Fetch interpretations associated with the logged-in user
     const interpretationData = await Interpretation.findAll({
       where: { user_id: req.session.user_id },
       include: [{ model: User, as: 'creator', attributes: ['name'] }],
     });
 
+    console.log('Raw interpretation data:', interpretationData); // Debug log for raw data
+
+    // Check if any data was returned
+    if (interpretationData.length === 0) {
+      console.log('No interpretations found for the user');
+    }
+
+    // Transform the data to a plain JavaScript object
     const interpretations = interpretationData.map((interpretation) =>
       interpretation.get({ plain: true })
     );
 
-    // Log data for debugging (optional)
+    // Log transformed data
     console.log('Fetched interpretations:', interpretations);
 
+    // Render the template with fetched data
     res.render('insights', {
       interpretations,
       logged_in: req.session.logged_in,
@@ -88,6 +101,8 @@ router.get('/insights', withAuth, async (req, res) => {
     res.status(500).json({ message: 'Failed to load insights' });
   }
 });
+
+// Example route handler to fetch interpretations
 
 router.get('/interpretations', withAuth, (req, res) => renderUserPage(req, res, 'interpretation'));
 // Route to render the user's profile
@@ -115,7 +130,7 @@ const renderUserPage = async (req, res, template) => {
     try {
         const userData = await User.findByPk(req.session.user_id, {
             attributes: { exclude: ['password'] },
-            include: [{ model: Dream }],
+            include: [{ model: Dream, Interpretation }],
         });
 
         if (!userData) {

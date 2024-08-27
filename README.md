@@ -1,43 +1,92 @@
 # DreamNet
-DreamNet is an AI-powered platform that connects your dreams to insightful interpretations, using Node.js, Express.js for a RESTful API, Handlebars.js for templating, and PostgreSQL with Sequelize ORM for database management.
 
-User Story:
+## Project Description
+**DreamNet** DreamNet is an AI-powered platform that connects your dreams to insightful interpretations, using Node.js, Express.js for a RESTful API, Handlebars.js for templating, and PostgreSQL with Sequelize ORM for database management.
 
-Title: Dream Exploration and Insight Generation
+## User Story:
 
-As a user interested in understanding my dreams,
+ As a User , I want to enter my dream and have the site interpret it
 
-I want to be able to log and review my dreams, receive insightful interpretations, and track my dream patterns,
+ ## Table of Contents
+ 1. [Installation](#installation)
+ 2. [Usage](#usage)
+ 3. [Features](#features)
+ 4. [Wireframe](#wireframe)
+ 5. [APIs Used](#apis-used)
+ 6. [Tasks Breakdown](#tasks-breakdown)
+ 7. [Contributing](#contributing)
+ 8. [License](#license)
+ 9. [Acknowledgements](#acknowledgements)
+ 10. [Contact Information](#contact-information)
+ 
+ To get started with **DreamNet**, follow these steps:
 
-So that I can gain a deeper understanding of my subconscious mind and identify recurring themes or insights.
+1. Clone the repository:
+    ```bash
+    git clone 
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd DreamNet
+    ```
+3. Install the dependencies:
+    ```bash
+    npm install
+    ```
+4. Start the development server:
+    ```bash
+    npm start
+    ```
+5. Install npm i express-handlebars:
+    ```bash
+    npm start
+    ```
 
-Acceptance Criteria:
+## Usage
+1. Open your web browser and navigate to `https://github.com/demichele-c/DreamNet`.
+2. Log in to DreamNet.
+2. Enter your dream in the provided input field.
+3. Receive your dream interpretation.
 
-Dream Logging:
+## Features
+- **Log In:** Users can sign in  .
+- **Dream Input:**Users can input their dreams .
+- **Interpretation:** Users will receive their dreams interpretation.
 
-Users can log their dreams by entering a description through a user-friendly form.
-Each dream entry includes a date and optional tags or categories.
-Dream Review:
+## Wireframe
+The wireframe for **DreamNet** can be viewed in the following slides:
 
-Users can view a list of their logged dreams with a summary and details.
-Dreams can be searched or filtered by date, tags, or keywords.
-Insight Generation:
 
-Users receive AI-generated interpretations or insights based on the content of their dreams.
-Insights are presented in a clear and understandable format.
-Dream Tracking:
+## APIs Used
 
-Users can view a summary of their dream patterns over time, such as recurring themes or emotions.
-Visualizations or charts display trends and insights derived from their dream data.
-Authentication:
 
-Users can create accounts, log in, and manage their dream entries securely.
-Authentication uses session management and cookies to keep users logged in.
-Responsive Design:
+## Contributing
+We welcome contributions to the **DreamNet** project! Please follow these steps:
 
-The application is accessible and functional on both desktop and mobile devices.
-The user interface is polished and intuitive, providing a seamless experience.
-Notes:
+1. Fork the repository.
+2. Create a new branch:
+    ```bash
+    git checkout -b feature-branch
+    ```
+3. Make your changes and commit them:
+    ```bash
+    git commit -m 'Add some feature'
+    ```
+4. Push to the branch:
+    ```bash
+    git push origin feature-branch
+    ```
+5. Create a new Pull Request.
 
-The application should provide a clean and engaging user interface.
-The AI-driven insights should be relevant and useful, helping users understand their dreams better.
+## License
+This project is licensed under the MIT License - see the [LICENSE](https://mit-license.org/) file for details.
+
+## Acknowledgements
+- Thanks to   for their API.
+
+## Contact Information
+For any inquiries or feedback, please contact:
+- Name:Tylor Barrios ,Charles Demichele, Lily Ebadi,Erin Spix 
+- Email: tylerbarrios@gmail.com,demichele.charles@yahoo.com , Lilly888_ebadi@yahoo.com,e.spix@yahoo.com
+
+

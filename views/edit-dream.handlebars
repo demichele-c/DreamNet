@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Dream</title>
+  <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+  <h1>Edit Dream</h1>
+  <form id="edit-dream-form">
+    <input type="hidden" name="id" value="{{id}}">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" value="{{name}}" required>
+    <label for="description">Description:</label>
+    <textarea name="description" id="description">{{description}}</textarea>
+    <button type="submit">Save</button>
+  </form>
+
+  <script src="/js/edit-dream.js"></script>
+</body>
+</html>

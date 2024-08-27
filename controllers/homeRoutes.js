@@ -1,10 +1,15 @@
 const router = require('express').Router();
+<<<<<<< HEAD
 const { Dream , User , Interpretations } = require('../models');
 const withAuth = require('../utils/auth');+
+=======
+const { Dream, User } = require('../models');
+const withAuth = require('../utils/auth');
+>>>>>>> 7f5b7a0ab973c7ff59ae667ad91f7b98489a113e
 
+// Route to get the homepage
 router.get('/', async (req, res) => {
   try {
-    
     const dreamData = await Dream.findAll({
       include: [
         {
@@ -27,6 +32,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 router.get('/interpretation', async (req, res) => {
   try {
     // Get all projects and JOIN with user data
@@ -35,10 +41,22 @@ router.get('/interpretation', async (req, res) => {
         {
           model: User,
           attributes: ['name'],
+=======
+router.get('/dreams', withAuth, async (req, res) => {
+  try {
+    // Find the logged-in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: Dream,
+          attributes: ['name', 'description', 'date_created'],
+>>>>>>> 7f5b7a0ab973c7ff59ae667ad91f7b98489a113e
         },
       ],
     });
 
+<<<<<<< HEAD
     // Serialize data so the template can read it
     const interpretationsArray = interpretationData.map((Interpretation) => Interpretation.get({ plain: true }));
 
@@ -46,12 +64,31 @@ router.get('/interpretation', async (req, res) => {
     res.render('interpretation', { 
       interpretationsArray, 
       logged_in: req.session.logged_in 
+=======
+    if (!userData) {
+      res.status(404).json({ message: 'User not found' });
+      return;
+    }
+
+    const user = userData.get({ plain: true });
+
+    // Pass the user and dreams data to the Handlebars template
+    res.render('dreams', {
+      ...user,
+      dreams: user.Dreams, // Pass dreams data here
+      logged_in: true,
+>>>>>>> 7f5b7a0ab973c7ff59ae667ad91f7b98489a113e
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+<<<<<<< HEAD
+=======
+
+// Route to get a single dream by id
+>>>>>>> 7f5b7a0ab973c7ff59ae667ad91f7b98489a113e
 router.get('/dream/:id', async (req, res) => {
   try {
     const dreamData = await Dream.findByPk(req.params.id, {
@@ -63,22 +100,29 @@ router.get('/dream/:id', async (req, res) => {
       ],
     });
 
+<<<<<<< HEAD
     
+=======
+    if (!dreamData) {
+      res.status(404).json({ message: 'No dream found with this id!' });
+      return;
+    }
+
+>>>>>>> 7f5b7a0ab973c7ff59ae667ad91f7b98489a113e
     const dream = dreamData.get({ plain: true });
 
     res.render('dream', {
       ...dream,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Use withAuth middleware to prevent access to route
+// Route to get the user's profile
 router.get('/profile', withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Dream }],
@@ -88,52 +132,16 @@ router.get('/profile', withAuth, async (req, res) => {
 
     res.render('profile', {
       ...user,
-      logged_in: true
+      logged_in: true,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
-    res.redirect('/profile');
-    return;
-  }
-
-  res.render('login');
-});
-
-// Use withAuth middleware to prevent access to route
-router.get('/dreams', withAuth, async (req, res) => {
-  try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Dream }],
-    });
-
-    const user = userData.get({ plain: true });
-
-    res.render('dreams', {
-      ...user,
-      logged_in: true
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-// Add this route to render the add dream form
-router.get('/dreams/add', withAuth, (req, res) => {
-  res.render('add-dream', {
-    logged_in: true
-  });
-});
 // Route to get the dashboard page
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
-    // Fetch data relevant to the dashboard
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Dream }],
@@ -145,15 +153,31 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
     const user = userData.get({ plain: true });
 
-    // Render the dashboard view with the user data
     res.render('dashboard', {
       ...user,
-      logged_in: true
+      logged_in: true,
     });
   } catch (err) {
-    console.error('Error fetching dashboard data:', err); // Improved error logging
-    res.status(500).json({ message: 'Failed to load dashboard' }); // User-friendly error message
+    console.error('Error fetching dashboard data:', err);
+    res.status(500).json({ message: 'Failed to load dashboard' });
   }
+});
+
+// Route to render the add dream page
+router.get('/dreams/add', withAuth, (req, res) => {
+  res.render('add-dream', {
+    logged_in: true, // Indicating the user is logged in
+  });
+});
+
+// Route to render the login page
+router.get('/login', (req, res) => {
+  if (req.session.logged_in) {
+    res.redirect('/profile');
+    return;
+  }
+
+  res.render('login');
 });
 
 module.exports = router;

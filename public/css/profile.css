@@ -1,36 +1,51 @@
-/* styles.css */
+/* profile.css */
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav {
-    background-color: #333;
-    color: #fff;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  nav ul li {
-    margin: 0;
-  }
-  
-  nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 14px 20px;
-    display: block;
-  }
-  
-  nav ul li a:hover {
-    background-color: #575757;
-  }
-  
+  font-family: 'Courier New', monospace; /* Monospace sans-serif font */
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.profile-nav {
+  background-color: transparent;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: none;
+  width: fit-content;
+  margin: 20px auto;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  text-align: center; /* Center-aligns the buttons */
+}
+
+.profile-nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Ensures buttons are centered */
+  gap: 10px;
+}
+
+.profile-nav ul li {
+  margin: 0;
+}
+
+.profile-nav ul li a, .profile-nav ul li button {
+  text-decoration: none;
+  padding: 10px 20px;
+  display: block;
+  text-align: center;
+  border-radius: 5px;
+  background: linear-gradient(to right, #00008b, #4b0082); /* Dark blue to purple gradient */
+  color: #ffffff; /* White text */
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s ease-in-out;
+}
+
+.profile-nav ul li a:hover, .profile-nav ul li button:hover {
+  background: linear-gradient(to right, #191970, #551a8b); /* Darker gradient on hover */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  transform: translateY(-3px); /* Slight lift on hover */
+}

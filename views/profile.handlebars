@@ -1,3 +1,4 @@
+{{!-- profile.handlebars --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
 </head>
 <body>
   <!-- Navigation Bar -->
-  <nav>
+  <nav class="profile-nav">
     <ul>
       <li><button id="dashboard-btn">Dashboard</button></li>
       <li><button id="logout">Logout</button></li>
@@ -17,10 +18,8 @@
   </nav>
 
   <!-- Main Content -->
-  <div class="row">
-    <div class="col-auto">
-      <h2>Welcome, {{name}} to DreamNet!</h2>
-    </div>
+  <div class="container">
+    <h2 class="title">Welcome, {{name}} to DreamNet!</h2>
   </div>
 
   <script src="/js/logout.js"></script>

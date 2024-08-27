@@ -1,9 +1,6 @@
 const router = require('express').Router();
-
-
 const { Dream, User } = require('../models');
 const withAuth = require('../utils/auth');
-
 
 // Route to get the homepage
 router.get('/', async (req, res) => {
@@ -30,8 +27,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-
-
+router.get('/dreams', withAuth, async (req, res) => {
   try {
     // Find the logged-in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
@@ -44,6 +40,10 @@ router.get('/', async (req, res) => {
       ],
     });
 
+    if (!userData) {
+      res.status(404).json({ message: 'User not found' });
+      return;
+    }
 
     const user = userData.get({ plain: true });
 

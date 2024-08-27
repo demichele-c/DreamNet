@@ -1,34 +1,5 @@
-
-{{!-- dashboard.handlebars --}}
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your CSS file -->
-</head>
-<body>
-    {{!-- <div class="dashboard-container"> <!-- Only this container will be present on the dashboard --> --}}
-        <h1 class="title">Dashboard</h1>
-        <div class="button-grid">
-            <div class="grid-item">
-                <a href="/dreams" class="dashboard-link">View Dreams</a>
-            </div>
-            <div class="grid-item">
-                <a href="/insights" class="dashboard-link">View Insights</a>
-            </div>
-            <div class="grid-item">
-                <a href="/interpretations" class="dashboard-link">AI Interpretation</a>
-            </div>
-            <div class="grid-item">
-                <button id="logout" class="dashboard-link">Logout</button>
-            </div>
-        </div>
-    </div>
-    {{#if logged_in}}
-    <script src="/js/logout.js"></script>
-    {{/if}}
-</body>
-</html>
-
-
+<h1>Dashboard</h1>
+<a href="/dreams/add">Add Dreams</a>
+<a href="/dreams">View Dreams</a>
+<a href="/insights">View Insights</a>
+<a href="/interpretations">AI Interpretation</a> <!-- New link -->

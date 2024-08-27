@@ -1,23 +1,33 @@
-{{!-- views/dreams.handlebars --}}
-<div class="dream-log-container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{name}}'s Dreams</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/dreams.css">
+</head>
+<body>
+  <header>
     <h2>{{name}}'s Dreams!</h2>
-    <div id="dreams" class="dream-grid"></div>
-</div>
-<script src="/js/dreams.js"></script>
-  <link rel="stylesheet" href="/css/styles.css"> 
-    <link rel="stylesheet" href="/css/dreams.css"> 
-<div class="dream-list">
-  {{#if dreams.length}}
-    {{#each dreams}}
-      <div class="dream-item">
-        <h2>{{name}}</h2>
-        <p>{{description}}</p>
-        <p>Created by {{../name}} on {{format_date date_created}}</p>
-        <button data-id="{{id}}" class="edit-btn">Edit</button>
-        <button data-id="{{id}}" class="delete-btn">Delete</button>
-      </div>
-    {{/each}}
-  {{else}}
-    <p>No dreams dreamt yet.</p>
-  {{/if}}
-</div>
+  </header>
+  <main>
+    <div id="dreams" class="dream-grid">
+      {{#if dreams.length}}
+        {{#each dreams}}
+          <div class="dream-item">
+            <h3>{{name}}</h3>
+            <p>{{description}}</p>
+            <p>Created by {{creatorName}} on {{format_date date_created}}</p>
+            <button data-id="{{id}}" class="edit-btn">Edit</button>
+            <button data-id="{{id}}" class="delete-btn">Delete</button>
+          </div>
+        {{/each}}
+      {{else}}
+        <p>No dreams dreamt yet.</p>
+      {{/if}}
+    </div>
+  </main>
+  <script src="/js/dreams.js"></script>
+</body>
+</html>

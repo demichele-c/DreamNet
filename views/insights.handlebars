@@ -3,24 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Insights</title>
-  <link rel="stylesheet" href="/styles.css">
+  <title>{{name}}'s Interpretations</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/interpretations.css">
 </head>
 <body>
   <header>
-    <h1>Dream Insights</h1>
-    {{#if logged_in}}
-      <a href="/profile">Profile</a>
-      <a href="/logout">Logout</a>
-    {{else}}
-      <a href="/login">Login</a>
-    {{/if}}
+    <h2>{{name}}'s Interpretations</h2>
   </header>
   <main>
-    <div id="interpretations-container">
-      <!-- Interpretations will be loaded here by JavaScript -->
+    <div id="interpretations" class="interpretation-grid">
+      {{#if interpretations.length}}
+        {{#each interpretations}}
+          <div class="interpretation-item">
+            <h3>Dream ID: {{id}}</h3>
+            <p><strong>Description:</strong> {{dream_description}}</p>
+            <p><strong>Interpretation:</strong> {{interpretation_text}}</p>
+            <p><strong>Created by:</strong> {{creator.name}}</p>
+            <p><strong>Created At:</strong> {{format_date created_at}}</p>
+            <button data-id="{{id}}" class="edit-btn">Edit</button>
+            <button data-id="{{id}}" class="delete-btn">Delete</button>
+          </div>
+        {{/each}}
+      {{else}}
+        <p>No interpretations found.</p>
+      {{/if}}
     </div>
   </main>
-  <script src="/js/insights.js"></script>
+ 
 </body>
 </html>

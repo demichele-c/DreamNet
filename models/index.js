@@ -14,14 +14,14 @@ Dream.belongsTo(User, {
   foreignKey: 'user_id'
 });
 
-// Removed associations with Interpretation
-// User.hasMany(Interpretation, {
-//   foreignKey: 'user_id',
-//   onDelete: 'CASCADE',
-// });
 
-// Interpretation.belongsTo(User, {
-//   foreignKey: 'user_id',
-// });
+User.hasMany(Interpretation, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE',
+});
+
+Interpretation.belongsTo(User, {
+  foreignKey: 'user_id',
+});
 
 module.exports = { User, Dream, Interpretation };

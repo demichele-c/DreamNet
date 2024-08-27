@@ -1,0 +1,27 @@
+{{!-- profile.handlebars --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="/css/profile.css"> <!-- Link to your CSS file -->
+  <link rel="stylesheet" href="/css/styles.css"> 
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="profile-nav">
+    <ul>
+      <li><button id="dashboard-btn">Dashboard</button></li>
+      <li><button id="logout">Logout</button></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h2 class="title">Welcome, {{name}} to DreamNet!</h2>
+  </div>
+
+  <script src="/js/profile.js"></script>
+</body>
+</html>

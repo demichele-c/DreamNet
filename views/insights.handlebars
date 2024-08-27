@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{name}}'s Interpretations</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/interpretations.css">
+</head>
+<body>
+  <header>
+    <h2>{{name}}'s Interpretations</h2>
+  </header>
+  <main>
+    <div id="interpretations" class="interpretation-grid">
+      {{#if interpretations.length}}
+        {{#each interpretations}}
+          <div class="interpretation-item">
+            <h3>Dream ID: {{id}}</h3>
+            <p><strong>Description:</strong> {{dream_description}}</p>
+            <p><strong>Interpretation:</strong> {{interpretation_text}}</p>
+            <p><strong>Created by:</strong> {{creator.name}}</p>
+            <p><strong>Created At:</strong> {{format_date created_at}}</p>
+            <button data-id="{{id}}" class="edit-btn">Edit</button>
+            <button data-id="{{id}}" class="delete-btn">Delete</button>
+          </div>
+        {{/each}}
+      {{else}}
+        <p>No interpretations found.</p>
+      {{/if}}
+    </div>
+  </main>
+ 
+</body>
+</html>

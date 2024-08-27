@@ -1,0 +1,23 @@
+{{!-- home.handlebars --}}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Welcome to DreamNet</h1>
+        <nav>
+            <ul>
+                {{#if isAuthenticated}}
+                    <li><a href="/dashboard">Dashboard</a></li>
+                {{else}}
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                {{/if}}
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>

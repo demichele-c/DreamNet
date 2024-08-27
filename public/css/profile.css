@@ -1,0 +1,116 @@
+/* profile.css */
+
+/* General Body and Container Styles */
+body {
+  font-family: 'Courier New', monospace; /* Monospace sans-serif font */
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(120deg, #001f4d, #00008b);
+  color: #ffffff;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(120deg, rgba(137,207,240, 0.8), rgba(230,230,250, 0.8));
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto; /* Centers the container */
+}
+
+.title {
+  font-size: 3em;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+}
+
+.dream-input {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.dream-input h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+#dreamInput {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  resize: none;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+button, .profile-nav ul li a, .profile-nav ul li button {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border: none;
+  background: linear-gradient(to right, #00008b, #4b0082); /* Dark blue to purple gradient */
+  color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s ease-in-out;
+}
+
+button:hover, .profile-nav ul li a:hover, .profile-nav ul li button:hover {
+  background: linear-gradient(to right, #191970, #551a8b); /* Darker gradient on hover */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  transform: translateY(-3px); /* Slight lift on hover */
+}
+
+/* Profile Navigation Styles */
+.profile-nav {
+  background-color: transparent;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: none;
+  width: fit-content;
+  margin: 20px auto;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  text-align: center; /* Center-aligns the buttons */
+}
+
+.profile-nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Ensures buttons are centered */
+  gap: 10px;
+}
+
+.profile-nav ul li {
+  margin: 0;
+}

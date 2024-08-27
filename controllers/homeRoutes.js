@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { Dream, User } = require('../models');
+const { Dream , User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
-    // Get all dreams and JOIN with user data
-    const dreamData = await Dreams.findAll({
+    // Get all projects and JOIN with user data
+    const dreamData = await Dream.findAll({
       include: [
         {
           model: User,
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
     const dreams = dreamData.map((dream) => dream.get({ plain: true }));
 
     // Pass serialized data and session flag into template
-    res.render('main', { 
+    res.render('homepage', { 
       dreams, 
       logged_in: req.session.logged_in 
     });
@@ -38,7 +38,7 @@ router.get('/dream/:id', async (req, res) => {
       ],
     });
 
-    const dream = dreamtData.get({ plain: true });
+    const dream = dreamData.get({ plain: true });
 
     res.render('dream', {
       ...dream,
@@ -55,7 +55,7 @@ router.get('/profile', withAuth, async (req, res) => {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Project }],
+      include: [{ model: Dream }],
     });
 
     const user = userData.get({ plain: true });

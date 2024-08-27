@@ -1,24 +1,25 @@
-module.exports = (sequelize, DataTypes) => {
-  const Insight = sequelize.define('Insight', {
-    insight: {
-      type: DataTypes.TEXT,
-      allowNull: false
-    },
-    dreamId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'Dreams',
-        key: 'id'
-      }
-    }
-  });
+// const {Model, DataTypes} = require('sequelize')
+// const sequelize = require('../config/connection')
 
-  Insight.associate = (models) => {
-    Insight.belongsTo(models.Dream, {
-      foreignKey: 'dreamId',
-      as: 'dream'
-    });
-  };
+// class Insight extends Model {}
+//  Insight.init( {
+//     insight: {
+//       type: DataTypes.TEXT,
+//       allowNull: false
+//     },
+//     dreamId: {
+//       type: DataTypes.INTEGER,
+//       references: {
+//         model: 'Dreams',
+//         key: 'id'
+//       }
+//     }},
 
-  return Insight;
-};
+//     {
+//       sequelize,
+//       freezeTableName: true,
+//       underscored: true,
+//       modelName: 'Insight',
+//   });
+  
+//     module.exports = Insight;

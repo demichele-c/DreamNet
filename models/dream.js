@@ -1,35 +1,43 @@
-module.exports = (sequelize, DataTypes) => {
-  const Dream = sequelize.define('Dream', {
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
+
+class Dream extends Model {}
+
+Dream.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     description: {
-      type: DataTypes.TEXT,
-      allowNull: false
+      type: DataTypes.STRING,
     },
-    date: {
-      type: DataTypes.DATEONLY,
-      allowNull: false
+    date_created: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
-    tags: {
-      type: DataTypes.STRING
-    },
-    userId: {
+    user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'Users',
-        key: 'id'
-      }
-    }
-  });
+        model: 'User',
+        key: 'id',
+      },
+    },
+  },
+  {
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'Dream',
+  }
+);
 
-  Dream.associate = (models) => {
-    Dream.belongsTo(models.User, {
-      foreignKey: 'userId',
-      as: 'user'
-    });
-    Dream.hasMany(models.Insight, {
-      foreignKey: 'dreamId',
-      as: 'insights'
-    });
-  };
-
-  return Dream;
-};
+module.exports = Dream;

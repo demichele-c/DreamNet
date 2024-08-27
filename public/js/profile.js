@@ -1,34 +1,28 @@
-// profile.js
+//public/js/profile.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Handle logout
-    const logoutButton = document.querySelector('a[href="/logout"]');
-  
-    if (logoutButton) {
-      logoutButton.addEventListener('click', async (event) => {
-        event.preventDefault();
-  
-        try {
-          // Send a POST request to the logout route
-          const response = await fetch('/logout', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
-  
-          if (response.ok) {
-            // Redirect to login page or another route after successful logout
-            window.location.href = '/login';
-          } else {
-            console.error('Logout failed');
-          }
-        } catch (error) {
-          console.error('Error during logout:', error);
-        }
+  // Handle Dashboard navigation
+  const dashboardBtn = document.getElementById('dashboard-btn');
+  if (dashboardBtn) {
+    dashboardBtn.addEventListener('click', () => {
+      window.location.href = '/dashboard'; // Navigate to the dashboard
+    });
+  }
+
+  // Handle Logout
+  const logoutBtn = document.getElementById('logout');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', async () => {
+      const response = await fetch('/api/users/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
       });
-    }
-  
-    // Add any additional client-side logic here
-  });
-  
+
+      if (response.ok) {
+        document.location.replace('/'); // Redirect to the homepage or login page after logout
+      } else {
+        alert('Failed to log out');
+      }
+    });
+  }
+});

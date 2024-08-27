@@ -1,56 +1,25 @@
-const newFormHandler = async (event) => {
-  event.preventDefault();
+//public/js/dreams.js
+ddocument.addEventListener('DOMContentLoaded', function() {
+  const dreamsContainer = document.getElementById('dreams');
 
-  const name = document.querySelector('#dream-name').value.trim();
-  const description = document.querySelector('#dream-desc').value.trim();
-
-  if (name && description) {
-    const response = await fetch(`/api/dreams`, {
-      method: 'POST',
-      body: JSON.stringify({ name, description }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (response.ok) {
-      document.location.replace('/dreams'); // Redirect to the dreams page
-    } else {
-      alert('Failed to create dream');
-    }
-  }
-};
-
-const delButtonHandler = async (event) => {
-  if (event.target.classList.contains('delete-btn')) {
-    const id = event.target.getAttribute('data-id');
-
-    const response = await fetch(`/api/dreams/${id}`, {
-      method: 'DELETE',
-    });
-
-    if (response.ok) {
-      document.location.replace('/dreams'); // Redirect to dreams page after deletion
-    } else {
-      alert('Failed to delete dream');
-    }
-  }
-};
-
-const editButtonHandler = (event) => {
-  if (event.target.classList.contains('edit-btn')) {
-    const id = event.target.getAttribute('data-id');
-    document.location.replace(`/dreams/edit/${id}`); // Redirect to edit page with dream ID
-  }
-};
-
-document
-  .querySelector('.new-dream-form')
-  .addEventListener('submit', newFormHandler);
-
-document
-  .querySelector('.dream-list')
-  .addEventListener('click', (event) => {
-    delButtonHandler(event);
-    editButtonHandler(event);
-  });
+  fetch('/api/dreams')
+      .then(response => {
+          if (!response.ok) throw new Error('Network response was not ok');
+          return response.json();
+      })
+      .then(dreams => {
+          dreams.forEach(dream => {
+              const dreamElement = document.createElement('div');
+              dreamElement.className = 'dream-item';
+              dreamElement.innerHTML = `
+                  <h2>${dream.name}</h2>
+                  <p>${dream.description}</p>
+                  <small>Logged on ${new Date(dream.date_created).toLocaleDateString()}</small>
+                  <button data-id="${dream.id}" class="edit-btn">Edit</button>
+                  <button data-id="${dream.id}" class="delete-btn">Delete</button>
+              `;
+              dreamsContainer.appendChild(dreamElement);
+          });
+      })
+      .catch(error => console.error('Error fetching dreams:', error));
+});

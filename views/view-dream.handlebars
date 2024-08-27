@@ -1,0 +1,14 @@
+{{!-- view-dream.handlebars --}}
+<div class="dream-list">
+  {{#if dreams.length}}
+    {{#each dreams}}
+      <div class="dream-item">
+        <h2>{{name}}</h2>
+        <p>{{description}}</p>
+        <p>Created by {{../name}} on {{date_created}}</p>
+      </div>
+    {{/each}}
+  {{else}}
+    <p>No dreams logged yet.</p>
+  {{/if}}
+</div>

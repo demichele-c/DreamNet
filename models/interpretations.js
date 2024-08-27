@@ -1,3 +1,5 @@
+//models/interpretations.js
+
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection'); // Adjust path as needed
 

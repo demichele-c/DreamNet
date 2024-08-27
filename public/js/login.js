@@ -1,5 +1,5 @@
 
-//login.js
+//public/js/login.js
 
 
 const loginFormHandler = async (event) => {

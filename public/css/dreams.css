@@ -1,0 +1,42 @@
+/* public/css/dreams.css */
+.dream-grid {
+    display: flex;               /* Use flexbox layout */
+    flex-wrap: wrap;            /* Allow items to wrap onto multiple lines */
+    justify-content: center;     /* Center items within the container */
+    gap: 20px;                  /* Space between items */
+    padding: 20px;              /* Padding around the grid */
+}
+
+.dream-item {
+    flex: 1 1 calc(33.333% - 40px); /* Each item takes up to 1/3 of the row minus gaps */
+    max-width: 300px;           /* Optional: max width for each item */
+    box-sizing: border-box;      /* Ensure padding and border are included in total width */
+    background: linear-gradient(135deg, #4b0082, #551a8b); /* Example background */
+    border: 2px solid #4b0082;   /* Example border */
+    border-radius: 10px;         /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    color: white;                 /* Text color */
+    font-family: 'Courier New', monospace; /* Font style */
+    padding: 1rem;               /* Padding inside each item */
+    text-align: left;            /* Left-align text */
+    cursor: pointer;             /* Pointer on hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition for hover effects */
+}
+
+.dream-item:hover {
+    transform: scale(1.05);      /* Scale up on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Increased shadow on hover */
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .dream-item {
+        flex: 1 1 calc(50% - 40px); /* Two columns on tablet screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .dream-item {
+        flex: 1 1 calc(100% - 40px); /* Single column on mobile screens */
+    }
+}

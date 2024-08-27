@@ -4,20 +4,12 @@
 <html>
 <head>
     <title>Dashboard</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your CSS file -->
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/dreams">View Dreams</a></li>
-            <li><a href="/insights">View Insights</a></li>
-            <li><a href="/interpretations">AI Interpretation</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-    </nav>
-    <div class="container">
+    {{!-- <div class="dashboard-container"> <!-- Only this container will be present on the dashboard --> --}}
         <h1 class="title">Dashboard</h1>
-        <div class="grid-container">
+        <div class="button-grid">
             <div class="grid-item">
                 <a href="/dreams" class="dashboard-link">View Dreams</a>
             </div>
@@ -28,9 +20,12 @@
                 <a href="/interpretations" class="dashboard-link">AI Interpretation</a>
             </div>
             <div class="grid-item">
-                <a href="/logout" class="dashboard-link">Logout</a>
+                <button id="logout" class="dashboard-link">Logout</button>
             </div>
         </div>
     </div>
+    {{#if logged_in}}
+    <script src="/js/logout.js"></script>
+    {{/if}}
 </body>
 </html>

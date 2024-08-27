@@ -1,4 +1,36 @@
-<h1>Dashboard</h1>
-<a href="/dreams">View Dreams</a>
-<a href="/insights">View Insights</a>
-<a href="/interpretations">AI Interpretation</a> <!-- New link -->
+{{!-- dashboard.handlebars --}}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/dreams">View Dreams</a></li>
+            <li><a href="/insights">View Insights</a></li>
+            <li><a href="/interpretations">AI Interpretation</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1 class="title">Dashboard</h1>
+        <div class="grid-container">
+            <div class="grid-item">
+                <a href="/dreams" class="dashboard-link">View Dreams</a>
+            </div>
+            <div class="grid-item">
+                <a href="/insights" class="dashboard-link">View Insights</a>
+            </div>
+            <div class="grid-item">
+                <a href="/interpretations" class="dashboard-link">AI Interpretation</a>
+            </div>
+            <div class="grid-item">
+                <a href="/logout" class="dashboard-link">Logout</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

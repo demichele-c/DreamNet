@@ -1,3 +1,6 @@
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
 document.addEventListener('DOMContentLoaded', () => {
   // Edit button click handler
   document.querySelectorAll('.edit-btn').forEach(button => {

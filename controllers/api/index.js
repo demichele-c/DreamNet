@@ -5,6 +5,6 @@ const userRoutes = require('./userRoutes');
 const dreamRoutes = require('./dreamRoutes');
 
 router.use('/users', userRoutes);
-router.use('/dreams', dreamRoutes);  // Ensure this line is present and correct
+router.use('/dreams', dreamRoutes);
 
 module.exports = router;

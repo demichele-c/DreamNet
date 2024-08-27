@@ -100,7 +100,7 @@ button:hover, .btn-primary:hover, .container a:hover, .profile-nav ul li button:
   transform: translateY(-3px);
 }
 
-/* Dashboard Grid Layout */
+Dashboard Grid Layout
 .grid-container, .button-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Two columns for buttons */

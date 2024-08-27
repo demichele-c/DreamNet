@@ -1,3 +1,4 @@
+//controlers/homeroutes.js
 const router = require('express').Router();
 const { Dream, User, Interpretation } = require('../models');
 const withAuth = require('../utils/auth');
@@ -20,28 +21,25 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Route to get a single dream by id
-router.get('/dream/:id', async (req, res) => {
-  try {
-    const dreamData = await Dream.findByPk(req.params.id, {
-      include: [{ model: User, attributes: ['name'] }],
-    });
-
-    if (!dreamData) {
-      return res.status(404).json({ message: 'No dream found with this id!' });
+router.get('/dreams', withAuth, async (req, res) => {
+    try {
+      const dreamData = await Dream.findAll({
+        where: { user_id: req.session.user_id },
+        include: [{ model: User, attributes: ['name'] }],
+      });
+  
+      const dreams = dreamData.map((dream) => dream.get({ plain: true }));
+  
+      res.render('dreams', { 
+        name: req.session.name, // Pass the logged-in user's name
+        dreams,
+        logged_in: req.session.logged_in,
+      });
+    } catch (err) {
+      res.status(500).json(err);
     }
-
-    const dream = dreamData.get({ plain: true });
-
-    res.render('dream', {
-      ...dream,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
+  });
+  
 router.get('/interpretations', withAuth, async (req, res) => {
     try {
       const interpretationData = await Interpretation.findAll({

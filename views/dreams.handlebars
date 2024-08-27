@@ -1,20 +1,20 @@
-{{!-- dreams.handlebars --}}
-
-<div class="row">
-  <div class="col-auto">
+{{!-- views/dreams.handlebars --}}
+<div class="dream-log-container">
     <h2>{{name}}'s Dreams!</h2>
-  </div>
+    <div id="dreams" class="dream-grid"></div>
 </div>
-
+<script src="/js/dreams.js"></script>
+  <link rel="stylesheet" href="/css/styles.css"> 
+    <link rel="stylesheet" href="/css/dreams.css"> 
 <div class="dream-list">
   {{#if dreams.length}}
     {{#each dreams}}
       <div class="dream-item">
         <h2>{{name}}</h2>
         <p>{{description}}</p>
-        <p>Created by {{../name}} on {{date_created}}</p>
-        <button data-id="{{id}}" class="edit-btn">Edit</button> <!-- Edit button -->
-        <button data-id="{{id}}" class="delete-btn">Delete</button> <!-- Delete button -->
+        <p>Created by {{../name}} on {{format_date date_created}}</p>
+        <button data-id="{{id}}" class="edit-btn">Edit</button>
+        <button data-id="{{id}}" class="delete-btn">Delete</button>
       </div>
     {{/each}}
   {{else}}

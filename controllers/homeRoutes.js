@@ -27,6 +27,8 @@ router.get('/dreams', withAuth, async (req, res) => {
         where: { user_id: req.session.user_id },
         include: [{ model: User, attributes: ['name'] }],
       });
+
+      // query the DB for all of the interpretations 
   
       const dreams = dreamData.map((dream) => dream.get({ plain: true }));
   

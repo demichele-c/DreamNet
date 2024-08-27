@@ -1,3 +1,5 @@
+//models/index.js
+
 const User = require('./user');
 const Dream = require('./dream');
 const Interpretation = require('./interpretations');

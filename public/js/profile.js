@@ -1,3 +1,5 @@
+//public/js/profile.js
+
 document.addEventListener('DOMContentLoaded', () => {
   // Handle Dashboard navigation
   const dashboardBtn = document.getElementById('dashboard-btn');

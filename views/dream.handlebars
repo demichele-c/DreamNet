@@ -1,22 +1,42 @@
-{{!-- dream.handlebars --}}
+{{!-- views/dreams.handlebars --}}
+<div class="dream-log-container">
+    <h2>{{name}}'s Dreams!</h2>
+    <div id="dreams" class="dream-grid">
+      {{!-- Dream Form --}}
+      <h1>Your Dreams</h1>
+      <form action="/api/dreams" method="post">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+        
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+        
+        <label for="tags">Tags (optional):</label>
+        <input type="text" id="tags" name="tags">
+        
+        <button type="submit">Add Dream</button>
+      </form>
 
-<h1>Your Dreams</h1>
-<form action="/api/dreams" method="post">
-  <label for="description">Description:</label>
-  <textarea id="description" name="description" required></textarea>
-  
-  <label for="date">Date:</label>
-  <input type="date" id="date" name="date" required>
-  
-  <label for="tags">Tags (optional):</label>
-  <input type="text" id="tags" name="tags">
-  
-  <button type="submit">Add Dream</button>
-</form>
+      {{!-- Dream List --}}
+      <div class="dream-list">
+        {{#if dreams.length}}
+          {{#each dreams}}
+            <div class="dream-item">
+              <h2>{{name}}</h2>
+              <p>{{description}}</p>
+              <p>Created by {{../name}} on {{format_date date_created}}</p>
+              <p>Tags: {{tags}}</p>
+              <button data-id="{{id}}" class="edit-btn">Edit</button>
+              <button data-id="{{id}}" class="delete-btn">Delete</button>
+            </div>
+          {{/each}}
+        {{else}}
+          <p>No dreams dreamt yet.</p>
+        {{/if}}
+      </div>
+    </div>
+</div>
 
-<h2>All Dreams</h2>
-<ul id="dreamList">
-  {{#each dreams}}
-    <li>{{this.description}} ({{this.date}}) - Tags: {{this.tags}}</li>
-  {{/each}}
-</ul>
+<script src="/js/dreams.js"></script>
+<link rel="stylesheet" href="/css/styles.css"> 
+<link rel="stylesheet" href="/css/dreams.css"> 

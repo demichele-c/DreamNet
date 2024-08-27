@@ -8,13 +8,29 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   flex-direction: column;
-  overflow: hidden;
-  position: relative;
   background: linear-gradient(120deg, #001f4d, #00008b);
   background-image: url('https://www.transparenttextures.com/patterns/stardust.png'), linear-gradient(120deg, #001f4d, #00008b);
   animation: bgAnimation 10s ease infinite;
+}
+
+.container, .dashboard-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(120deg, rgba(137,207,240, 0.8), rgba(230,230,250, 0.8));
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(10px);
 }
 
 @keyframes bgAnimation {
@@ -23,7 +39,7 @@ body {
   100% { background-position: 0 0; }
 }
 
-.container, .dashboard-container {
+/* .container, .dashboard-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,7 +55,7 @@ body {
   position: relative;
   z-index: 2;
   backdrop-filter: blur(10px);
-}
+} */
 
 /* Headline Styles with Reduced Text Outline and Hover Effect */
 .title, h1, h2, h3 {

@@ -1,23 +1,42 @@
-{{!-- views/dreams.handlebars --}}
+{{!-- dreams.handlebars --}}
 <div class="dream-log-container">
     <h2>{{name}}'s Dreams!</h2>
-    <div id="dreams" class="dream-grid"></div>
-</div>
-<script src="/js/dreams.js"></script>
-  <link rel="stylesheet" href="/css/styles.css"> 
-    <link rel="stylesheet" href="/css/dreams.css"> 
-<div class="dream-list">
-  {{#if dreams.length}}
-    {{#each dreams}}
-      <div class="dream-item">
-        <h2>{{name}}</h2>
-        <p>{{description}}</p>
-        <p>Created by {{../name}} on {{format_date date_created}}</p>
-        <button data-id="{{id}}" class="edit-btn">Edit</button>
-        <button data-id="{{id}}" class="delete-btn">Delete</button>
+    <div id="dreams" class="dream-grid">
+      {{!-- Dream Form --}}
+      <h1>Your Dreams</h1>
+      <form action="/api/dreams" method="post">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+        
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+        
+        <!-- Remove the following section for tags -->
+        {{!--
+        <label for="tags">Tags (optional):</label>
+        <input type="text" id="tags" name="tags">
+        --}}
+        
+        <button type="submit">Add Dream</button>
+      </form>
+
+      {{!-- Dream List --}}
+      <div class="dream-list">
+        {{#if dreams.length}}
+          {{#each dreams}}
+            <div class="dream-item">
+              <h2>{{name}}</h2>
+              <p>{{description}}</p>
+              <p>Created by {{../name}} on {{format_date date_created}}</p>
+              <!-- Remove this section for tags -->
+              {{!-- <p>Tags: {{tags}}</p> --}}
+              <button data-id="{{id}}" class="edit-btn">Edit</button>
+              <button data-id="{{id}}" class="delete-btn">Delete</button>
+            </div>
+          {{/each}}
+        {{else}}
+          <p>No dreams dreamt yet.</p>
+        {{/if}}
       </div>
-    {{/each}}
-  {{else}}
-    <p>No dreams dreamt yet.</p>
-  {{/if}}
+    </div>
 </div>

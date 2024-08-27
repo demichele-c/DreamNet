@@ -2,7 +2,7 @@
 
 /* General Body and Container Styles */
 body {
-  font-family: 'Courier New', monospace; /* Monospace sans-serif font */
+  font-family: 'Courier New', monospace;
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
@@ -12,6 +12,7 @@ body {
   min-height: 100vh;
   background: linear-gradient(120deg, #001f4d, #00008b);
   color: #ffffff;
+  flex-direction: column;
 }
 
 .dashboard-container {
@@ -25,7 +26,7 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 80%;
   max-width: 600px;
-  margin: 20px auto; /* Centers the container */
+  margin: 20px auto;
 }
 
 .title {

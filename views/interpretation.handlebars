@@ -15,14 +15,15 @@
         <h3>Interpretation Result:</h3>
         <div id="result"></div>
     </div>
-    <div id="previousInterpretations">
-        <h3>Previous Interpretations:</h3>
-        {{#each interpretations}}
-            <div class="interpretation">
-                <p><strong>Dream:</strong> {{this.dream_description}}</p>
-                <p><strong>Interpretation:</strong> {{this.interpretation_text}}</p>
-            </div>
-        {{/each}}
-    </div>
+   <div id="previousInterpretations">
+    <h3>Previous Interpretations:</h3>
+    {{#each interpretations}}
+        <div class="interpretation">
+            <p><strong>Dream:</strong> {{this.dream_description}}</p>
+            <p><strong>Interpretation:</strong> {{this.interpretation_text}}</p>
+        </div>
+    {{/each}}
+</div>
+
 </div>
 <script src="/js/script.js"></script>

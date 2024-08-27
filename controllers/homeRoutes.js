@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Dream, User } = require('../models');
+const { Dream, User, Interpretation } = require('../models');
 const withAuth = require('../utils/auth');
 
 // Route to get the homepage
@@ -42,6 +42,27 @@ router.get('/dream/:id', async (req, res) => {
   }
 });
 
+router.get('/interpretations', withAuth, async (req, res) => {
+    try {
+      const interpretationData = await Interpretation.findAll({
+        include: [{ model: User, attributes: ['name'] }], // Include the user information if needed
+      });
+  
+      const interpretations = interpretationData.map((interpretation) =>
+        interpretation.get({ plain: true })
+      );
+  
+      res.render('interpretations', {
+        interpretations,
+        logged_in: req.session.logged_in,
+      });
+    } catch (err) {
+      console.error('Error in /interpretations route:', err);
+      res.status(500).json(err);
+    }
+  });
+  
+  
 // Helper function to get user data and render a template
 const renderUserPage = async (req, res, template) => {
   try {
@@ -88,21 +109,20 @@ router.get('/login', (req, res) => {
 
 // Route to get all dreams (e.g., /dreams)
 router.get('/dreams', async (req, res) => {
-    try {
-      const dreamData = await Dream.findAll({
-        include: [{ model: User, attributes: ['name'] }],
-      });
-  
-      const dreams = dreamData.map((dream) => dream.get({ plain: true }));
-  
-      res.render('dreams', { 
-        dreams, 
-        logged_in: req.session.logged_in 
-      });
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
-  
+  try {
+    const dreamData = await Dream.findAll({
+      include: [{ model: User, attributes: ['name'] }],
+    });
+
+    const dreams = dreamData.map((dream) => dream.get({ plain: true }));
+
+    res.render('dreams', { 
+      dreams, 
+      logged_in: req.session.logged_in 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;

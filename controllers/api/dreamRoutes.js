@@ -1,3 +1,4 @@
+//controllers/api/dreamRoutes.js
 const router = require('express').Router();
 const { Dream } = require('../../models');
 const withAuth = require('../../utils/auth');
@@ -56,5 +57,25 @@ router.get('/:id', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+router.get('/:id', withAuth, async (req, res) => {
+  try {
+    const dreamData = await Dream.findByPk(req.params.id);
+
+    if (!dreamData) {
+      res.status(404).json({ message: 'No dream found with this id!' });
+      return;
+    }
+
+    const dream = dreamData.get({ plain: true });
+
+    res.render('view-dream', {
+      ...dream,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 module.exports = router;

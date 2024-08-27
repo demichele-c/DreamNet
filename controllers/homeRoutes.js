@@ -1,25 +1,7 @@
+
 //controlers/homeroutes.js
 const router = require('express').Router();
 const { Dream, User, Interpretation } = require('../models');
-const withAuth = require('../utils/auth');
-
-// Route to get the homepage
-router.get('/', async (req, res) => {
-  try {
-    const dreamData = await Dream.findAll({
-      include: [{ model: User, attributes: ['name'] }],
-    });
-
-    const dreams = dreamData.map((dream) => dream.get({ plain: true }));
-
-    res.render('homepage', { 
-      dreams, 
-      logged_in: req.session.logged_in 
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 router.get('/dreams', withAuth, async (req, res) => {
     try {
@@ -39,6 +21,50 @@ router.get('/dreams', withAuth, async (req, res) => {
       });
     } catch (err) {
       res.status(500).json(err);
+
+// Route to get the user's dreams (assuming this was intended to be a route)
+router.get('/dreams', withAuth, async (req, res) => {
+  try {
+    // Find the logged-in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: Dream,
+          attributes: ['name', 'description', 'date_created'],
+        },
+      ],
+    });
+
+    const user = userData.get({ plain: true });
+
+    // Pass the user and dreams data to the Handlebars template
+    res.render('dreams', {
+      ...user,
+      dreams: user.Dreams, // Pass dreams data here
+      logged_in: true,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Route to get a single dream by id
+router.get('/dream/:id', async (req, res) => {
+  try {
+    const dreamData = await Dream.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
+    });
+
+    if (!dreamData) {
+      res.status(404).json({ message: 'No dream found with this id!' });
+      return;
+
     }
   });
   

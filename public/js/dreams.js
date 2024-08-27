@@ -1,25 +1,30 @@
-//public/js/dreams.js
-ddocument.addEventListener('DOMContentLoaded', function() {
-  const dreamsContainer = document.getElementById('dreams');
+document.addEventListener('DOMContentLoaded', () => {
+  // Edit button click handler
+  document.querySelectorAll('.edit-btn').forEach(button => {
+    button.addEventListener('click', (event) => {
+      const dreamId = event.target.getAttribute('data-id');
+      // Redirect to the edit page
+      window.location.href = `/edit-dream/${dreamId}`;
+    });
+  });
 
-  fetch('/api/dreams')
-      .then(response => {
-          if (!response.ok) throw new Error('Network response was not ok');
-          return response.json();
-      })
-      .then(dreams => {
-          dreams.forEach(dream => {
-              const dreamElement = document.createElement('div');
-              dreamElement.className = 'dream-item';
-              dreamElement.innerHTML = `
-                  <h2>${dream.name}</h2>
-                  <p>${dream.description}</p>
-                  <small>Logged on ${new Date(dream.date_created).toLocaleDateString()}</small>
-                  <button data-id="${dream.id}" class="edit-btn">Edit</button>
-                  <button data-id="${dream.id}" class="delete-btn">Delete</button>
-              `;
-              dreamsContainer.appendChild(dreamElement);
-          });
-      })
-      .catch(error => console.error('Error fetching dreams:', error));
+  // Delete button click handler
+  document.querySelectorAll('.delete-btn').forEach(button => {
+    button.addEventListener('click', async (event) => {
+      const dreamId = event.target.getAttribute('data-id');
+      try {
+        const response = await fetch(`/api/dreams/${dreamId}`, {
+          method: 'DELETE'
+        });
+        if (response.ok) {
+          // Remove the dream item from the DOM
+          event.target.closest('.dream-item').remove();
+        } else {
+          console.error('Failed to delete dream');
+        }
+      } catch (error) {
+        console.error('Error deleting dream:', error);
+      }
+    });
+  });
 });

@@ -18,8 +18,6 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-module.exports = router;
-
 // Route to get all dreams for the logged-in user
 router.get('/', withAuth, async (req, res) => {
   try {
@@ -98,25 +96,6 @@ router.delete('/:id', withAuth, async (req, res) => {
     res.status(200).json(dreamData);
   } catch (err) {
     res.status(500).json(err);
-  }
-});
-// Add this route to render the add dream form
-router.get('/dreams/add', withAuth, (req, res) => {
-  res.render('add-dream', {
-    logged_in: true
-  });
-});
-// Add this route to handle form submissions for adding a dream
-router.post('/add', withAuth, async (req, res) => {
-  try {
-    const newDream = await Dream.create({
-      ...req.body,
-      user_id: req.session.user_id,
-    });
-
-    res.status(200).json(newDream);
-  } catch (err) {
-    res.status(400).json(err);
   }
 });
 

@@ -1,19 +1,26 @@
-{{!-- insights.handlebars
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Your Dream Insights</title>
-    <link rel="stylesheet" href="/path/to/your/css/styles.css"> <!-- Update with your actual path -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insights</title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Your Dream Insights</h1>
-        <div id="insights">
-            {{#each insights}}
-                <p>{{this.insight}}</p>
-            {{/each}}
-        </div>
+  <header>
+    <h1>Dream Insights</h1>
+    {{#if logged_in}}
+      <a href="/profile">Profile</a>
+      <a href="/logout">Logout</a>
+    {{else}}
+      <a href="/login">Login</a>
+    {{/if}}
+  </header>
+  <main>
+    <div id="interpretations-container">
+      <!-- Interpretations will be loaded here by JavaScript -->
     </div>
+  </main>
+  <script src="/js/insights.js"></script>
 </body>
-</html> --}}
+</html>

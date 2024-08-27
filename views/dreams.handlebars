@@ -1,45 +1,21 @@
 <div class="row">
   <div class="col-auto">
-    <h2>Welcome, {{name}}!</h2>
+    <h2>{{name}}'s Dreams!</h2>
   </div>
 </div>
 
-<div class="row mt-4">
-  <div class="col-md-6">
-    <h3>Create a New Dream:</h3>
-
-    <form class="form new-dream-form">
-      <div class="form-group">
-        <label for="dream-name">Dream name:</label>
-        <input class="form-input" type="text" id="dream-name" name="dream-name" />
-      </div>
-     
-      <div class="form-group">
-        <label for="dream-desc">Description:</label>
-        <textarea class="form-input" id="dream-desc" name="dream-desc"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create</button>
-      </div>
-    </form>
-  </div>
-
+<div class="dream-list">
   {{#if dreams.length}}
-  <div class="col-md-6 dream-list">
-    <h3>Current Dreams:</h3>
-
-    {{#each dreams as |dream|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/dream/{{dream.id}}">{{dream.name}}</a></h4>
+    {{#each dreams}}
+      <div class="dream-item">
+        <h2>{{name}}</h2>
+        <p>{{description}}</p>
+        <p>Created by {{../name}} on {{date_created}}</p>
+        <button data-id="{{id}}" class="edit-btn">Edit</button> <!-- Edit button -->
+        <button data-id="{{id}}" class="delete-btn">Delete</button> <!-- Delete button -->
       </div>
-      <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{dream.id}}">DELETE</button>
-      </div>
-    </div>
     {{/each}}
-  </div>
+  {{else}}
+    <p>No dreams dreamt yet.</p>
   {{/if}}
 </div>
-
-<script src="./js/dreams.js"></script>

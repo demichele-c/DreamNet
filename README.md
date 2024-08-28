@@ -6,6 +6,12 @@
 
 DreamNet is a web application that allows users to log and manage their dreams, view AI-driven interpretations, and interact with their dream data. Built with Express.js and Sequelize for the backend, and Handlebars for dynamic HTML rendering, it features user authentication, session management, and CRUD operations for dreams. The project integrates OpenAI’s API for generating dream interpretations, offering users insights into their subconscious. It combines modern web technologies with an intuitive interface to provide a comprehensive platform for exploring and understanding dreams.
 
+
+## Deployed Website
+
+You can visit the deployed version of this application here: [DreamNet on Render](https://dreamnet-4.onrender.com/)
+
+
 ### Screenshots
 
 #### Home Page

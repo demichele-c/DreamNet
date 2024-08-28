@@ -22,10 +22,7 @@ if (process.env.DB_URL) {
         process.env.DB_USER,   // Database user from environment variable
         process.env.DB_PASSWORD, // Database password from environment variable
         {
-            host: 'localhost', // Host for local development (default is localhost)
-            dialect: 'postgres', // Specify the type of database (PostgreSQL)
-            port: process.env.DB_PORT || 5432, // Use DB_PORT env variable or default to 5432
-            logging: false // Optional: Disable SQL query logging in the console
+
         }
     );
 }

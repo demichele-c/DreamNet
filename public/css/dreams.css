@@ -1,53 +1,45 @@
+/* Container for the grid of dream items */
 .dream-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.1); /* Slight background color for the grid */
-    overflow-y: auto; /* Enable scrolling when content exceeds screen size */
-    height: 100vh; /* Ensure the grid occupies the full viewport height */
-    box-sizing: border-box; /* Ensure padding is included in the grid's dimensions */
+    display: flex;               /* Use flexbox layout for the container */
+    flex-wrap: wrap;            /* Allow items to wrap onto multiple lines */
+    justify-content: center;     /* Center items within the container */
+    gap: 20px;                  /* Space between items */
+    padding: 20px;              /* Padding around the grid container */
 }
 
+/* Style for each dream item */
 .dream-item {
-    flex: 1 1 calc(30% - 40px); /* Each item takes about 30% of the row, accounting for gaps */
-    max-width: 300px;
-    min-width: 250px;
-    box-sizing: border-box;
+    flex: 1 1 calc(33.333% - 40px); /* Each item takes up 1/3 of the row minus gaps */
+    max-width: 300px;           /* Optional: maximum width for each item */
+    box-sizing: border-box;      /* Ensure padding and border are included in the total width */
     background: linear-gradient(135deg, #4b0082, #551a8b); /* Gradient background */
-    border: 2px solid #4b0082;
-    border-radius: 15px; /* Slightly more rounded corners for a softer look */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: white;
-    font-family: 'Courier New', monospace;
-    padding: 1rem;
-    text-align: left;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden; /* Ensure content does not overflow the grid item */
+    border: 2px solid #4b0082;   /* Border color matching the background */
+    border-radius: 10px;         /* Rounded corners for each item */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect for depth */
+    color: white;                 /* White text color */
+    font-family: 'Courier New', monospace; /* Font style for the text */
+    padding: 1rem;               /* Padding inside each item */
+    text-align: left;            /* Left-align text inside each item */
+    cursor: pointer;             /* Pointer cursor on hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
 }
 
+/* Hover effect for each dream item */
 .dream-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);      /* Slightly scale up the item on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Increase shadow on hover for a deeper effect */
 }
 
-/* Media queries for responsive design */
-@media (max-width: 1024px) {
-    .dream-item {
-        flex: 1 1 calc(45% - 40px); /* Two columns on slightly smaller screens */
-    }
-}
-
+/* Responsive design for tablet screens */
 @media (max-width: 768px) {
     .dream-item {
-        flex: 1 1 calc(60% - 40px); /* Larger items on medium screens */
+        flex: 1 1 calc(50% - 40px); /* Two columns on tablet screens */
     }
 }
 
+/* Responsive design for mobile screens */
 @media (max-width: 480px) {
     .dream-item {
-        flex: 1 1 calc(100% - 40px); /* Single column on small screens */
+        flex: 1 1 calc(100% - 40px); /* Single column on mobile screens */
     }
 }

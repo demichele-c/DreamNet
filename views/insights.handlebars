@@ -1,35 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Character encoding for the document -->
   <meta charset="UTF-8">
+  
+  <!-- Viewport settings for responsive design -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Page title dynamically set to the user's name -->
   <title>{{name}}'s Interpretations</title>
+  
+  <!-- Link to the main CSS file for styling -->
   <link rel="stylesheet" href="/css/styles.css">
+  
+  <!-- Link to specific CSS file for interpretation page styling -->
   <link rel="stylesheet" href="/css/interpretations.css">
 </head>
 <body>
+  <!-- Header section displaying the page title -->
   <header>
     <h2>{{name}}'s Interpretations</h2>
   </header>
+  
   <main>
+    <!-- Main content area for displaying interpretations -->
     <div id="interpretations" class="interpretation-grid">
       {{#if interpretations.length}}
+        <!-- If there are interpretations, iterate through each one -->
         {{#each interpretations}}
           <div class="interpretation-item">
+            <!-- Displaying the Dream ID -->
             <h3>Dream ID: {{id}}</h3>
+            
+            <!-- Displaying the dream description -->
             <p><strong>Description:</strong> {{dream_description}}</p>
+            
+            <!-- Displaying the interpretation text -->
             <p><strong>Interpretation:</strong> {{interpretation_text}}</p>
+            
+            <!-- Displaying the name of the creator -->
             <p><strong>Created by:</strong> {{creator.name}}</p>
+            
+            <!-- Displaying the creation date formatted -->
             <p><strong>Created At:</strong> {{format_date created_at}}</p>
+            
+            <!-- Buttons for editing and deleting the interpretation -->
             <button data-id="{{id}}" class="edit-btn">Edit</button>
             <button data-id="{{id}}" class="delete-btn">Delete</button>
           </div>
         {{/each}}
       {{else}}
+        <!-- Message displayed if no interpretations are found -->
         <p>No interpretations found.</p>
       {{/if}}
     </div>
   </main>
- 
 </body>
 </html>

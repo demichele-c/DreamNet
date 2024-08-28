@@ -3,22 +3,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Character encoding for the HTML document -->
   <meta charset="UTF-8">
+  
+  <!-- Viewport settings for responsive design -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Page title -->
   <title>Edit Dream</title>
+  
+  <!-- Link to the CSS file for styling the page -->
   <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your CSS file -->
 </head>
 <body>
+  <!-- Main heading for the page -->
   <h1>Edit Dream</h1>
+  
+  <!-- Form for editing an existing dream -->
   <form id="edit-dream-form">
+    <!-- Hidden input to hold the dream's ID -->
     <input type="hidden" name="id" value="{{id}}">
+    
+    <!-- Label and input field for the dream's name -->
     <label for="name">Name:</label>
     <input type="text" name="name" id="name" value="{{name}}" required>
+    
+    <!-- Label and textarea for the dream's description -->
     <label for="description">Description:</label>
     <textarea name="description" id="description">{{description}}</textarea>
+    
+    <!-- Submit button to save the changes -->
     <button type="submit">Save</button>
   </form>
 
+  <!-- Link to the JavaScript file handling form submission -->
   <script src="/js/edit-dream.js"></script>
 </body>
 </html>

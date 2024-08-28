@@ -1,33 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Character encoding for the HTML document -->
   <meta charset="UTF-8">
+  
+  <!-- Viewport settings for responsive design -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Page title, dynamically set to the user's name and 'Dreams' -->
   <title>{{name}}'s Dreams</title>
+  
+  <!-- Link to the main stylesheet for general styling -->
   <link rel="stylesheet" href="/css/styles.css">
+  
+  <!-- Link to additional stylesheet specifically for dreams page styling -->
   <link rel="stylesheet" href="/css/dreams.css">
 </head>
 <body>
   <header>
+    <!-- Header displaying a personalized message with the user's name -->
     <h2>{{name}}'s Dreams!</h2>
   </header>
   <main>
+    <!-- Main content area for displaying dreams -->
     <div id="dreams" class="dream-grid">
+      <!-- Check if there are any dreams to display -->
       {{#if dreams.length}}
+        <!-- Iterate over each dream in the 'dreams' array -->
         {{#each dreams}}
           <div class="dream-item">
+            <!-- Display dream name -->
             <h3>{{name}}</h3>
+            
+            <!-- Display dream description -->
             <p>{{description}}</p>
+            
+            <!-- Display dream creation date and creator's name -->
             <p>Created by {{creatorName}} on {{format_date date_created}}</p>
+            
+            <!-- Uncomment buttons below to add edit and delete functionality -->
             {{!-- <button data-id="{{id}}" class="edit-btn">Edit</button> --}}
             {{!-- <button data-id="{{id}}" class="delete-btn">Delete</button> --}}
           </div>
         {{/each}}
       {{else}}
+        <!-- Message to display if no dreams are available -->
         <p>No dreams dreamt yet.</p>
       {{/if}}
     </div>
   </main>
+  
+  <!-- Link to the JavaScript file for handling dreams-related interactions -->
   <script src="/js/dreams.js"></script>
 </body>
 </html>

@@ -1,18 +1,28 @@
 {{!-- home.handlebars --}}
+
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Page title -->
     <title>Home</title>
+    
+    <!-- Link to the CSS file for styling the page -->
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+    <!-- Container for the main content -->
     <div class="container">
+        <!-- Main heading for the page -->
         <h1 class="title">Welcome to DreamNet</h1>
+        
+        <!-- Navigation menu -->
         <nav>
             <ul>
                 {{#if isAuthenticated}}
+                    <!-- If the user is authenticated, show the dashboard link -->
                     <li><a href="/dashboard">Dashboard</a></li>
                 {{else}}
+                    <!-- If the user is not authenticated, show login and register links -->
                     <li><a href="/login">Login</a></li>
                     <li><a href="/register">Register</a></li>
                 {{/if}}

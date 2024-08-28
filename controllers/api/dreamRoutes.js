@@ -1,61 +1,136 @@
-// File: controllers/api/.js
-
+// Import the Router method from Express
 const router = require('express').Router();
-const { Dream } = require('../../models');
+// Import the Dream and User models
+const { Dream, User } = require('../../models');
+// Import the authentication middleware to protect routes
 const withAuth = require('../../utils/auth');
-require("dotenv").config();
-const OpenAI = require("openai");
 
-// Route to create a new dream and generate DALL-E image
-router.post('/', withAuth, async (req, res) => {
-    // --> Do we request from the OPEN_API BEFORE we save the record to the database
-    const client = new OpenAI({
-      apiKey: process.env.OPEN_AI_KEY,
-    });
-    
-    try {
-      const chatCompletion = await client.chat.completions.create({
-        messages: [{ role: 'user', content:JSON.stringify(req.body.description)}],
-        model: 'gpt-3.5-turbo',
-      });
-      //console.log("Response: ", chatCompletion)
-      console.log("Interpretation: ", chatCompletion.choices[0].message.content)
-      const responseData =  chatCompletion.choices[0].message.content;
-    //  res.json(chatCompletion.choices)
-      
-      const newDream = await Dream.create({
-        name: req.body.name, // Ensure 'name' is correctly handled
-        description: req.body.description,
-        user_id: req.session.user_id,
-      });
-
-      console.log("New Dream: ", newDream.dataValues)
-      res.status(200).json(responseData);
-    } catch (error) {
-      console.log("err: ", error);
-      res.json({ msg: error}) 
-    }
+// Route to render the add dream page
+router.get('/add', (req, res) => {
+  console.log('GET /dreams/add route hit'); // Log to console for debugging
+  res.render('add-dream', {
+    logged_in: true, // Pass the logged-in status to the template
+  });
 });
 
-
-
-router.post("/interpret-dream", async (req, res) =>{
-  const client = new OpenAI({
-    apiKey: process.env.OPEN_AI_KEY,
-  });
-  
+// Route to create a new dream
+// Protected by withAuth middleware to ensure the user is logged in
+router.post('/', withAuth, async (req, res) => {
   try {
-    const chatCompletion = await client.chat.completions.create({
-      messages: [{ role: 'user', content:JSON.stringify(req.body)}],
-      model: 'gpt-3.5-turbo',
+    // Create a new dream using data from the request body and the logged-in user's ID
+    const newDream = await Dream.create({
+      ...req.body, // Spread the properties from the request body
+      user_id: req.session.user_id, // Set the user_id from the session
     });
-    console.log("Response: ", chatCompletion)
-    res.json(chatCompletion.choices)
-    
-  } catch (error) {
-    console.log("err: ", error);
-    res.json({ msg: error}) 
-  }
-}); 
 
+    // Respond with the new dream data in JSON format
+    res.status(200).json(newDream);
+  } catch (err) {
+    // If there's an error, respond with a 400 status and the error message
+    res.status(400).json(err);
+  }
+});
+
+// Route to get all dreams for the logged-in user
+// Protected by withAuth middleware
+router.get('/', withAuth, async (req, res) => {
+  try {
+    // Find all dreams that belong to the logged-in user
+    const dreams = await Dream.findAll({
+      where: {
+        user_id: req.session.user_id, // Filter dreams by the current user's ID
+      },
+    });
+
+    // Render the 'dreams' template, passing the dreams data and logged-in status
+    res.render('dreams', { 
+      dreams: dreams.map(dream => dream.get({ plain: true })), // Convert each dream instance to plain object
+      logged_in: req.session.logged_in // Pass the logged-in status to the template
+    });
+  } catch (err) {
+    // If there's an error, respond with a 500 status and the error message
+    res.status(500).json(err);
+  }
+});
+
+// Route to get a single dream by id for editing
+// Protected by withAuth middleware
+router.get('/edit/:id', withAuth, async (req, res) => {
+  try {
+    // Find a dream by its primary key (id)
+    const dreamData = await Dream.findByPk(req.params.id);
+
+    // If no dream is found, respond with a 404 status and a message
+    if (!dreamData) {
+      res.status(404).json({ message: 'No dream found with this id!' });
+      return;
+    }
+
+    // Convert the dream instance to a plain object
+    const dream = dreamData.get({ plain: true });
+
+    // Render the 'edit-dream' template, passing the dream data and logged-in status
+    res.render('edit-dream', {
+      ...dream, // Spread the dream data into the template
+      logged_in: req.session.logged_in // Pass the logged-in status to the template
+    });
+  } catch (err) {
+    // If there's an error, respond with a 500 status and the error message
+    res.status(500).json(err);
+  }
+});
+
+// Route to update a dream by id
+// Protected by withAuth middleware
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    // Update the dream data using the request body and filter by id and user_id
+    const [updated] = await Dream.update(req.body, {
+      where: {
+        id: req.params.id, // ID from the route parameter
+        user_id: req.session.user_id, // Ensure it belongs to the logged-in user
+      },
+    });
+
+    // If no rows are updated, respond with a 404 status and a message
+    if (!updated) {
+      res.status(404).json({ message: 'No dream found with this id!' });
+      return;
+    }
+
+    // If update is successful, respond with a success message
+    res.status(200).json({ message: 'Dream updated successfully!' });
+  } catch (err) {
+    // If there's an error, respond with a 500 status and the error message
+    res.status(500).json(err);
+  }
+});
+
+// Route to delete a dream by id
+// Protected by withAuth middleware
+router.delete('/:id', withAuth, async (req, res) => {
+  try {
+    // Delete the dream by filtering with id and user_id
+    const dreamData = await Dream.destroy({
+      where: {
+        id: req.params.id, // ID from the route parameter
+        user_id: req.session.user_id, // Ensure it belongs to the logged-in user
+      },
+    });
+
+    // If no rows are deleted, respond with a 404 status and a message
+    if (!dreamData) {
+      res.status(404).json({ message: 'No dream found with this id!' });
+      return;
+    }
+
+    // If deletion is successful, respond with the deleted dream data
+    res.status(200).json(dreamData);
+  } catch (err) {
+    // If there's an error, respond with a 500 status and the error message
+    res.status(500).json(err);
+  }
+});
+
+// Export the router to be used in other parts of the application
 module.exports = router;

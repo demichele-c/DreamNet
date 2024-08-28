@@ -10,7 +10,7 @@ const sequelize = require('./config/connection'); // Import Sequelize instance
 const SequelizeStore = require('connect-session-sequelize')(session.Store); // Import session store for Sequelize
 
 const app = express(); // Initialize Express application
-const PORT = process.env.PORT || 5432; // Set the port for the server
+const port = process.env.PORT || 5432; // Set the port for the server
 
 // Create Handlebars instance with custom helpers
 const hbs = exphbs.create({ helpers });
@@ -52,7 +52,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Use imported routes for handling requests
 app.use(routes);
 
-// Synchronize Sequelize models with the database and start the server
+
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log('We are live!')); // Start the server and log a message
+    app.listen(port, '0.0.0.0', () => { // Binding to '0.0.0.0' is important for Render
+        console.log(`Server is running on port ${port}`);
+    });
 });

@@ -12,7 +12,7 @@ DreamNet is a web application that allows users to log and manage their dreams, 
 ![Home Page](public/images/homepage.png)
 
 #### Login Page
-![Login Page](public/images/login.png)
+![Login Page](public/images/loginpage.png)
 
 #### Dashboard
 ![Dashboard](public/images/dashboard.png)

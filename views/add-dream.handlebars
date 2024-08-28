@@ -1,33 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Set character encoding to UTF-8 for proper text rendering -->
   <meta charset="UTF-8">
+  <!-- Ensure proper scaling on different devices -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Page title displayed in the browser tab -->
   <title>Add Dream</title>
+  <!-- Link to external stylesheet for styling the page -->
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+  <!-- Navigation bar with links to different sections of the application -->
   <nav>
     <ul>
+      <!-- Link to the dashboard page -->
       <li><a href="/dashboard">Dashboard</a></li>
+      <!-- Link to view all dreams -->
       <li><a href="/dreams">View Dreams</a></li>
-      <li><a href="/imagination">View imagination</a></li>
+      <!-- Link to view imagination section -->
+      <li><a href="/imagination">View Imagination</a></li>
+      <!-- Link to AI interpretation page -->
       <li><a href="/interpretations">AI Interpretation</a></li>
+      <!-- Logout button to end the user session -->
       <li><button id="logout">Logout</button></li>
     </ul>
   </nav>
 
+  <!-- Main heading for the page -->
   <h1>Add a New Dream</h1>
+  <!-- Form for adding a new dream -->
   <form id="add-dream-form">
+    <!-- Label and input field for the dream's name -->
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required>
     
+    <!-- Label and textarea for the dream's description -->
     <label for="description">Description:</label>
     <textarea id="description" name="description" required></textarea>
     
+    <!-- Submit button to add the dream -->
     <button type="submit">Add Dream</button>
+  </form>
 
-
+  <!-- Link to external JavaScript file for handling form submission -->
   <script src="/js/addDream.js"></script>
 </body>
 </html>

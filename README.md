@@ -1,92 +1,60 @@
 # DreamNet
 
-## Project Description
-**DreamNet** DreamNet is an AI-powered platform that connects your dreams to insightful interpretations, using Node.js, Express.js for a RESTful API, Handlebars.js for templating, and PostgreSQL with Sequelize ORM for database management.
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
-## User Story:
+## Description
 
- As a User , I want to enter my dream and have the site interpret it
+DreamNet is a web application that allows users to log and manage their dreams, view AI-driven interpretations, and interact with their dream data. Built with Express.js and Sequelize for the backend, and Handlebars for dynamic HTML rendering, it features user authentication, session management, and CRUD operations for dreams. The project integrates OpenAI’s API for generating dream interpretations, offering users insights into their subconscious. It combines modern web technologies with an intuitive interface to provide a comprehensive platform for exploring and understanding dreams.
 
- ## Table of Contents
- 1. [Installation](#installation)
- 2. [Usage](#usage)
- 3. [Features](#features)
- 4. [Wireframe](#wireframe)
- 5. [APIs Used](#apis-used)
- 6. [Tasks Breakdown](#tasks-breakdown)
- 7. [Contributing](#contributing)
- 8. [License](#license)
- 9. [Acknowledgements](#acknowledgements)
- 10. [Contact Information](#contact-information)
- 
- To get started with **DreamNet**, follow these steps:
+### Screenshots
 
-1. Clone the repository:
-    ```bash
-    git clone 
-    ```
-2. Navigate to the project directory:
-    ```bash
-    cd DreamNet
-    ```
-3. Install the dependencies:
-    ```bash
-    npm install
-    ```
-4. Start the development server:
-    ```bash
-    npm start
-    ```
-5. Install npm i express-handlebars:
-    ```bash
-    npm start
-    ```
+#### Home Page
+![Home Page](public/images/homepage.png)
+
+#### Login Page
+![Login Page](public/images/login.png)
+
+#### Dashboard
+![Dashboard](public/images/dashboard.png)
+
+#### AI Interpreter
+![AI Interpreter](public/images/ai.png)
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [License](#license)
+- [Contact/Questions](#questions)
+## Installation
+
+To install and set up DreamNet, first clone the repository from GitHub and navigate into the project directory. Run npm install to install all required dependencies. Next, set up your database by creating a .env file with your database configuration and OpenAI API key. Run \i schema.sql to create the database, and npm run seed to populate it with initial data. Start the application with npm run dev and visit http://localhost:3001 in your browser to access the app. Make sure you have PostgreSQL and Node.js installed on your machine.
 
 ## Usage
-1. Open your web browser and navigate to `https://github.com/demichele-c/DreamNet`.
-2. Log in to DreamNet.
-2. Enter your dream in the provided input field.
-3. Receive your dream interpretation.
 
-## Features
-- **Log In:** Users can sign in  .
-- **Dream Input:**Users can input their dreams .
-- **Interpretation:** Users will receive their dreams interpretation.
-
-## Wireframe
-The wireframe for **DreamNet** can be viewed in the following slides:
-
-
-## APIs Used
-
+DreamNet is a web application that allows users to manage their dreams, receive AI-generated interpretations, and view detailed insights. After logging in or registering, users can add and view their dreams, which are displayed in a user-friendly dashboard. From the dashboard, users can access various features including viewing their dreams, exploring AI interpretations, and navigating back to the dashboard. The application uses session-based authentication for secure access and provides real-time interaction with the database for dream management. To get started, simply navigate to the dashboard and use the provided forms to input dreams and view their interpretations.
 
 ## Contributing
-We welcome contributions to the **DreamNet** project! Please follow these steps:
 
-1. Fork the repository.
-2. Create a new branch:
-    ```bash
-    git checkout -b feature-branch
-    ```
-3. Make your changes and commit them:
-    ```bash
-    git commit -m 'Add some feature'
-    ```
-4. Push to the branch:
-    ```bash
-    git push origin feature-branch
-    ```
-5. Create a new Pull Request.
+Contributions to DreamNet are welcome and encouraged! To contribute, please fork the repository and create a pull request with your changes. Ensure that your code adheres to the project's coding standards and includes appropriate tests. Before submitting a pull request, make sure your changes are well-documented, and provide a clear description of the modifications or features added. If you are fixing a bug or adding a new feature, please include relevant issues or feature requests in your pull request description. For any questions or to discuss potential changes, open an issue in the repository to start a conversation with the maintainers.
+
+## Tests
+
+To test DreamNet using Insomnia, start by ensuring your server is running with npm start or node server.js. Open Insomnia and create new requests for each of the API endpoints, such as /api/users/login, /api/users/logout, /api/dreams, and /api/interpretations. For each endpoint, set the appropriate HTTP method (GET, POST, PUT, DELETE), include necessary headers (like Content-Type: application/json), and provide request body data as needed. Execute the requests to verify that they return the expected responses and interact correctly with your server. Inspect the returned data to ensure it matches your application's functionality and handle any errors or discrepancies as they arise.
+
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](https://mit-license.org/) file for details.
 
-## Acknowledgements
-- Thanks to   for their API.
+This project is licensed under the MIT license. Click [here](https://opensource.org/licenses/MIT) for more details.
 
-## Contact Information
-For any inquiries or feedback, please contact:
-- Name:Tylor Barrios ,Charles Demichele, Lily Ebadi,Erin Spix 
-- Email: tylerbarrios@gmail.com,demichele.charles@yahoo.com , Lilly888_ebadi@yahoo.com,e.spix@yahoo.com
+## Contact/Questions
 
+If you have any questions, please feel free to reach out to any of the following team members:
+
+- **Tylor Barrios**: [tylerbarrios@gmail.com](mailto:tylerbarrios@gmail.com) | GitHub: [tylorbarrios](https://github.com/tylorbarrios)
+- **Charles Demichele**: [demichele.charles@yahoo.com](mailto:demichele.charles@yahoo.com) | GitHub: [demichele-c](https://github.com/demichele-c)
+- **Lily Ebadi**: [Lilly888_ebadi@yahoo.com](mailto:Lilly888_ebadi@yahoo.com) | GitHub: [lilyebadi](https://github.com/lilyebadi)
+- **Erin Spix**: [e.spix@yahoo.com](mailto:e.spix@yahoo.com) | GitHub: [erinspix](https://github.com/erinspix)
 

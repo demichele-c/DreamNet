@@ -1,44 +1,68 @@
 {{!-- login.handlebars --}}
 
+<!-- Container for the login and signup forms, organized in a responsive grid -->
 <div class="row">
+  <!-- Column for the login form -->
   <div class="col-md-6">
     <h2>Login</h2>
 
+    <!-- Login form -->
     <form class="form login-form">
+      <!-- Username input group -->
       <div class="form-group">
-        <label for="userName-login">username:</label>
+        <label for="userName-login">Username:</label>
+        <!-- Input field for username, used for logging in -->
         <input class="form-input" type="text" id="userName-login" />
       </div>
+      
+      <!-- Password input group -->
       <div class="form-group">
-        <label for="password-login">password:</label>
+        <label for="password-login">Password:</label>
+        <!-- Input field for password, used for logging in -->
         <input class="form-input" type="password" id="password-login" />
       </div>
+      
+      <!-- Submit button for the login form -->
       <div class="form-group">
-        <button class="btn btn-primary" type="submit">login</button>
+        <button class="btn btn-primary" type="submit">Login</button>
       </div>
     </form>
   </div>
+  
+  <!-- Column for the signup form -->
   <div class="col-md-6">
     <h2>Signup</h2>
 
+    <!-- Signup form -->
     <form class="form signup-form">
+      <!-- Name input group -->
       <div class="form-group">
-        <label for="name-signup">name:</label>
+        <label for="name-signup">Name:</label>
+        <!-- Input field for the user's name, used for registration -->
         <input class="form-input" type="text" id="name-signup" />
       </div>
+      
+      <!-- Username input group -->
       <div class="form-group">
-        <label for="userName-signup">username:</label>
+        <label for="userName-signup">Username:</label>
+        <!-- Input field for username, used for registration -->
         <input class="form-input" type="text" id="userName-signup" />
       </div>
+      
+      <!-- Password input group -->
       <div class="form-group">
-        <label for="password-signup">password:</label>
+        <label for="password-signup">Password:</label>
+        <!-- Input field for password, used for registration -->
         <input class="form-input" type="password" id="password-signup" />
       </div>
+      
+      <!-- Submit button for the signup form -->
       <div class="form-group">
-        <button class="btn btn-primary" type="submit">signup</button>
+        <button class="btn btn-primary" type="submit">Signup</button>
       </div>
     </form>
   </div>
 </div>
 
+<!-- JavaScript file for handling login and signup form submissions -->
 <script src="./js/login.js"></script>

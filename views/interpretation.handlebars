@@ -1,30 +1,40 @@
-
-    <!-- Dream Input Form for Interpretation -->
-    <div class="dream-input">
-      <h3>Input Your Dream for Interpretation</h3>
-      <form id="dreamForm">
-        <div class="form-group">
-          <label for="dreamName">Dream Name:</label>
-          <input type="text" id="dreamName" name="dream_name" placeholder="Name your dream..." required />
-        </div>
-        <div class="form-group">
-          <label for="dreamInput">Dream Description:</label>
-          <textarea id="dreamInput" name="dream_description" rows="4" cols="50" placeholder="Describe your dream here..." required></textarea>
-
-        </div>
-        <button type="submit">Get Interpretation</button>
-      </form>
-
-      <!-- Interpretation Result -->
-      <div id="interpretationResult" style="margin-top: 14px;">
-        <!-- The interpretation text will be inserted here -->
-      </div>
-      <div class="back-button-container" style="margin-top: 20px;">
-      <a href="/dashboard" class="dashboard-link">Back to Dashboard</a>
-      </div>
+<!-- Dream Input Form for Interpretation -->
+<div class="dream-input">
+  <!-- Section heading for the form -->
+  <h3>Input Your Dream for Interpretation</h3>
+  
+  <!-- Form for users to input their dream -->
+  <form id="dreamForm">
+    <!-- Group for the dream name input -->
+    <div class="form-group">
+      <label for="dreamName">Dream Name:</label>
+      <!-- Input field for the name of the dream -->
+      <input type="text" id="dreamName" name="dream_name" placeholder="Name your dream..." required />
     </div>
-  </div>
+    
+    <!-- Group for the dream description input -->
+    <div class="form-group">
+      <label for="dreamInput">Dream Description:</label>
+      <!-- Textarea for describing the dream -->
+      <textarea id="dreamInput" name="dream_description" rows="4" cols="50" placeholder="Describe your dream here..." required></textarea>
+    </div>
+    
+    <!-- Submit button to get interpretation -->
+    <button type="submit">Get Interpretation</button>
+  </form>
 
-  <script src="/js/dashboard.js"></script>
+  <!-- Container for displaying the interpretation result -->
+  <div id="interpretationResult" style="margin-top: 14px;">
+    <!-- The interpretation text will be inserted here -->
+  </div>
+  
+  <!-- Link to return to the dashboard -->
+  <div class="back-button-container" style="margin-top: 20px;">
+    <a href="/dashboard" class="dashboard-link">Back to Dashboard</a>
+  </div>
+</div>
+
+<!-- Link to the JavaScript file handling form submission and interactions -->
+<script src="/js/dashboard.js"></script>
 </body>
 </html>

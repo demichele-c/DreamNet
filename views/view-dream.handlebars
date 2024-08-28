@@ -1,14 +1,20 @@
 {{!-- view-dream.handlebars --}}
 <div class="dream-list">
+  <!-- Check if there are any dreams to display -->
   {{#if dreams.length}}
+    <!-- Iterate over each dream in the dreams array -->
     {{#each dreams}}
       <div class="dream-item">
+        <!-- Display the name of the dream -->
         <h2>{{name}}</h2>
+        <!-- Display the description of the dream -->
         <p>{{description}}</p>
+        <!-- Display the creator's name and the date the dream was created -->
         <p>Created by {{../name}} on {{date_created}}</p>
       </div>
     {{/each}}
   {{else}}
+    <!-- Message displayed if no dreams are available -->
     <p>No dreams logged yet.</p>
   {{/if}}
 </div>

@@ -1,23 +1,22 @@
-// Import required modules
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
-const routes = require('./controllers'); // Import the routes from the controllers directory
+const routes = require('./controllers'); // Import routes
 const helpers = require('./utils/helpers'); // Import Handlebars helpers
 
 const sequelize = require('./config/connection'); // Import Sequelize instance
 const SequelizeStore = require('connect-session-sequelize')(session.Store); // Import session store for Sequelize
 
-const app = express(); // Initialize Express application
-const port = process.env.PORT || 5432; // Set the port for the server
+const app = express(); // Initialize Express app
+const port = process.env.PORT || 3000; // Default to 3000 or use PORT from environment
 
 // Create Handlebars instance with custom helpers
 const hbs = exphbs.create({ helpers });
 
 // Session configuration
 const sess = {
-    secret: process.env.SESSION_SECRET, // Secret key for signing the session ID cookie
+    secret: process.env.SESSION_SECRET || 'default_secret', // Provide a default secret for local development
     cookie: {
         maxAge: 300000, // Cookie expiration time set to 5 minutes
         httpOnly: true, // Cookie cannot be accessed via JavaScript
@@ -32,11 +31,7 @@ const sess = {
 };
 
 // Initialize session middleware with the defined configuration
-try {
-    app.use(session(sess));
-} catch (error) {
-    console.error('Session setup error:', error); // Log error if session setup fails
-}
+app.use(session(sess));
 
 // Set up Handlebars as the view engine
 app.engine('handlebars', hbs.engine);
@@ -52,9 +47,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Use imported routes for handling requests
 app.use(routes);
 
-
+// Sync database and start server
 sequelize.sync({ force: false }).then(() => {
     app.listen(port, '0.0.0.0', () => { // Binding to '0.0.0.0' is important for Render
         console.log(`Server is running on port ${port}`);
     });
+}).catch(error => {
+    console.error('Failed to sync database:', error);
 });
